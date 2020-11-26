@@ -1,0 +1,54 @@
+{:tasks
+ {makedeps
+  {:doc
+   "Post-processes deps.edn"
+   :requires
+   ([clojure.edn :as edn]
+    [clojure.set :as set])
+   :task
+   (let [deps
+         (-> *command-line-args*
+           (first)
+           (or "deps.edn")
+           (slurp)
+           (edn/read-string))
+
+         secret
+         (try
+           (-> *command-line-args*
+             (second)
+             (or "secret-deps.edn")
+             (slurp)
+             (edn/read-string))
+           (catch Exception _))
+
+         all-deps (merge-with merge deps secret)
+
+         lite (-> #{:performance/benchmark :imre/hashp
+                    :imre/trace :inspect/reveal}
+                (sort))
+
+         full (-> #{:imre/measure :imre/speculative
+                    :alpha/reflect :imre/decompile}
+                (into lite)
+                (sort))
+
+         alias-recipes
+         {:cursive/lite lite
+          :cursive/full full
+
+          ;; backwards-compatibility
+          :cursive-lite lite
+          :cursive-full full}
+
+         recipe->alias
+         (fn [recipe]
+           (-> all-deps
+             (:aliases)
+             ((apply juxt recipe))
+             (->> (reduce (fn [acc m] (merge-with merge acc m))))
+             (select-keys [:extra-deps])))]
+     (-> all-deps
+       (update :aliases
+         into (map (juxt key (comp recipe->alias val))) alias-recipes)
+       (prn)))}}}
