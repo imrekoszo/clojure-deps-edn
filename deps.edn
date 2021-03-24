@@ -24,8 +24,8 @@
  ;; Default Paths
  ;; Directories to include in the classpath to run the application
  ;; Development only paths should be defined in aliases, eg. :env/dev
- ;; Project deps.edn file superceeds this setting
- :paths ["src"]
+ ;; Project deps.edn file supersedes this setting
+ ;:paths ["src"]
 
  ;; End of: Default Paths
  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -279,7 +279,8 @@
    {find-deps/find-deps
     {:git/url "https://github.com/hagmonk/find-deps"
      :sha     "9bf23a52cb0a8190c9c2c7ad1d796da802f8ce7a"}}
-   :main-opts ["-m" "find-deps.core"]}
+   :main-opts
+   ["-m" "find-deps.core"]}
 
 
   ;; Visualizing dependencies in a project
@@ -309,10 +310,6 @@
                    org.slf4j/slf4j-nop     {:mvn/version "RELEASE"}}
    :main-opts     ["-m" "antq.core"]}
 
-  :hack/antq
-  {:replace-deps
-   {antq/antq {:local/root "/home/practicalli/projects/clojure/community-tools/antq"}}
-   :main-opts ["-m" "antq.core"]}
 
 
   ;; The classic project for checking maven based dependencies
@@ -594,12 +591,6 @@
   ;;               "--middleware" "[cider.nrepl/cider-middleware,vlaaad.reveal.nrepl/middleware]"
   ;;               "-f" "rebel-readline.main/-main"]}
 
-
-  :inspect/reveal-local ;; Hacking the project
-  {:extra-deps {vlaaad/reveal
-                {:local/root "/home/practicalli/projects/clojure/visualization/reveal/"}}
-   :main-opts  ["-m" "vlaaad.reveal" "repl"]}
-
   ;; Reveal REPL with nrepl server, connect to from a Clojure aware editor
   ;; clj -M:inspect/reveal-nrepl
   :inspect/reveal-nrepl
@@ -648,10 +639,9 @@
 
   ;; - start a non-interactive REPL with a headless nREPL server
   ;; clojure -M:middleware/nrepl
-
-
-  :middleware/nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.8.3"}}
-                     :main-opts  ["-m" "nrepl.cmdline"]}
+  :middleware/nrepl
+  {:extra-deps {nrepl/nrepl {:mvn/version "0.8.3"}}
+   :main-opts  ["-m" "nrepl.cmdline"]}
 
   ;; Run a REPL using nREPL server for access by cider-connect-clj
   ;; clojure -M:middleware/cider-clj
@@ -870,7 +860,7 @@
   :test/eftest
   {:extra-paths ["test"]
    :extra-deps  {eftest/eftest {:mvn/version "0.5.9"}}
-   :main-opts   ["-e"  "(require,'[eftest.runner,:refer,[find-tests,run-tests]]),(run-tests,(find-tests,\"test\"))"]}
+   :main-opts   ["-e" "(require,'[eftest.runner,:refer,[find-tests,run-tests]]),(run-tests,(find-tests,\"test\"))"]}
 
   ;; clojure -M:test/eftest
   :test/eftest-sequential
@@ -976,7 +966,7 @@
                 {:git/url "https://github.com/benedekfazekas/morpheus.git"
                  :sha     "7f4876ea631a6f5ccee2094d255efd2d1a98ffb6"}}
    :main-opts  ["-m" "thomasa.morpheus.main"
-                "-d"  "graphs" "-f" "svg" "src" "test"]}
+                "-d" "graphs" "-f" "svg" "src" "test"]}
 
 
   ;; Visualize connections between library dependencies and project namespaces
@@ -1140,25 +1130,26 @@
  ;; Maven Central and Clojars are the canonical repositories for library dependencies
  ;; JCenter is large and fast mirror often accessible behind corporate firewalls
 
- :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
-             "clojars" {:url "https://repo.clojars.org/"}
+ :mvn/repos
+ {"central" {:url "https://repo1.maven.org/maven2/"}
+  "clojars" {:url "https://repo.clojars.org/"}
 
-             ;; Clojure snapshots
-             ;; "sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}
+  ;; Clojure snapshots
+  ;; "sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}
 
-             ;; clojars.org mirror - publicly accessible
-             ;; "jcenter" {:url "https://jcenter.bintray.com"}
+  ;; clojars.org mirror - publicly accessible
+  ;; "jcenter" {:url "https://jcenter.bintray.com"}
 
-             ;; Maven Central Google Cloud Storage mirrors
-             ;; Americas
-             ;; "google-maven-central" {:url "https://maven-central.storage-download.googleapis.com/maven2/"}
-             ;; Asia
-             ;; "google-maven-central" {:url "https://maven-central-asia.storage-download.googleapis.com/maven2/"}
-             ;; Europe
-             ;; "google-maven-central" {:url "https://maven-central-eu.storage-download.googleapis.com/maven2/"}
+  ;; Maven Central Google Cloud Storage mirrors
+  ;; Americas
+  ;; "google-maven-central" {:url "https://maven-central.storage-download.googleapis.com/maven2/"}
+  ;; Asia
+  ;; "google-maven-central" {:url "https://maven-central-asia.storage-download.googleapis.com/maven2/"}
+  ;; Europe
+  ;; "google-maven-central" {:url "https://maven-central-eu.storage-download.googleapis.com/maven2/"}
 
-             ;; "clojars-china-mirror" {:url "https://mirrors.tuna.tsinghua.edu.cn/clojars/"}
+  ;; "clojars-china-mirror" {:url "https://mirrors.tuna.tsinghua.edu.cn/clojars/"}
 
-             ;; Example of local Artifactory repository configuration
-             ;; {"business-area" {:url "https://artifacts.internal-server.com:443/artifactory/business-area-maven-local"}
-             }}
+  ;; Example of local Artifactory repository configuration
+  ;; {"business-area" {:url "https://artifacts.internal-server.com:443/artifactory/business-area-maven-local"}
+  }}
