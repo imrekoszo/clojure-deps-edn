@@ -22,23 +22,16 @@
 (def all-deps (merge-with merge deps secret))
 
 (def alias-recipes
-  (let [->lite #(-> #{:performance/benchmark :imre/hashp
-                      #_:imre/nrebl
-                      :imre/trace :inspect/reveal}
-                    (conj %)
-                    (sort))
+  (let [lite (-> #{:performance/benchmark :imre/hashp
+                   :imre/trace :inspect/reveal}
+                 (sort))
         ->full #(-> #{:imre/measure :imre/speculative
                       :alpha/reflect :imre/decompile}
                     (into %)
                     (sort))
-        lite   (->lite :inspect/rebl)
-        full   (->full lite)
-        lite-8 (->lite :inspect/rebl-java8)]
+        full   (->full lite)]
     {:cursive/lite   lite
      :cursive/full   full
-
-     :cursive/lite-8 lite-8
-     :cursive/full-8 (->full lite-8)
 
      ;; backwards-compatibility
      :cursive-lite   lite
