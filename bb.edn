@@ -25,7 +25,7 @@
          all-deps (merge-with merge deps secret)
 
          lite (-> #{:performance/benchmark :imre/hashp
-                    :imre/trace :inspect/reveal}
+                    :imre/trace :inspect/reveal :imre/aviso-pretty}
                 (sort))
 
          full (-> #{:imre/measure :imre/speculative
