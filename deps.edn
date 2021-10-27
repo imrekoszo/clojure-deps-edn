@@ -561,7 +561,7 @@
   ;; clojure -M:inspect/reveal:rebel -J-Dvlaaad.reveal.prefs='{:theme :light :font-family "Ubuntu Mono" :font-size 32}'
 
   ;; Cursive JVM args:
-  ;; -Dvlaaad.reveal.prefs={:theme,:light,:font-family,"JetBrains Mono",:font-size,15}
+  ;; -Dvlaaad.reveal.prefs={:theme,:light,:font-family,"JetBrains Mono",:font-size,14}
 
   :inspect/reveal
   {:extra-deps {vlaaad/reveal                     {:mvn/version "1.3.214"}
@@ -574,7 +574,7 @@
   {:extra-deps {vlaaad/reveal {:mvn/version "1.3.214"}}
    :ns-default vlaaad.reveal
    :exec-fn    repl
-   :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,15}"]
+   :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
    :main-opts  ["-m" "vlaaad.reveal" "repl"]}
 
 
@@ -618,7 +618,7 @@
   :inspect/reveal-light-nrepl
   {:extra-deps {vlaaad/reveal {:mvn/version "1.3.214"}
                 nrepl/nrepl   {:mvn/version "0.8.3"}}
-   :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,15}"]
+   :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
    :main-opts  ["-m" "nrepl.cmdline"
                 "--middleware" "[vlaaad.reveal.nrepl/middleware]"]}
 
