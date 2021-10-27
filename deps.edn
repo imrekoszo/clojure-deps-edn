@@ -136,7 +136,7 @@
   ;; Run a Clojure repl with reveal and nrepl interactively
   ;; clj -M:repl/reveal-nrepl
   :repl/reveal-nrepl
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.214"}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.226"}
                 nrepl/nrepl   {:mvn/version "0.8.3"}}
    :main-opts  ["-m" "nrepl.cmdline"
                 "--middleware" "[vlaaad.reveal.nrepl/middleware]"
@@ -146,7 +146,7 @@
   ;; Replace font-family with local font (should be slightly faster startup)
   ;; clj -M:repl/reveal-light-nrepl
   :repl/reveal-light-nrepl
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.214"}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.226"}
                 nrepl/nrepl   {:mvn/version "0.8.3"}}
    :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"https://ff.static.1001fonts.net/u/b/ubuntu.mono.ttf\",:font-size,32}"]
    :main-opts  ["-m" "nrepl.cmdline"
@@ -158,7 +158,7 @@
   ;; clojure -M:repl/rebel-reveal
   :repl/rebel-reveal
   {:extra-deps
-   {vlaaad/reveal              {:mvn/version "1.3.214"}
+   {vlaaad/reveal              {:mvn/version "1.3.226"}
     com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
    :jvm-opts  ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"https://ff.static.1001fonts.net/u/b/ubuntu.mono.ttf\",:font-size,32}"]
    :main-opts ["-e" "(require,'rebel-readline.core),(require,'rebel-readline.clojure.line-reader),(require,'rebel-readline.clojure.service.local),(require,'rebel-readline.clojure.main),(require,'vlaaad.reveal)(rebel-readline.core/with-line-reader,(rebel-readline.clojure.line-reader/create,(rebel-readline.clojure.service.local/create)),(vlaaad.reveal/repl,:prompt,(fn,[]),:read,(rebel-readline.clojure.main/create-repl-read)))"]}
@@ -182,7 +182,7 @@
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
                  :sha     "d77476f3d5f624249462e275ae62d26da89f320b"}
                 ;; Set logging implementation to no-operation
-                org.slf4j/slf4j-nop {:mvn/version "1.7.31"}}}
+                org.slf4j/slf4j-nop {:mvn/version "1.7.32"}}}
 
 
   ;;;; Remote REPL connection
@@ -337,7 +337,7 @@
   ;; cd ~/.clojure && clojure -M:project/outdated
   :project/outdated
   {:replace-paths []
-   :replace-deps  {com.github.liquidz/antq {:mvn/version "1.0.0"}
+   :replace-deps  {com.github.liquidz/antq {:mvn/version "1.1.0"}
                    org.slf4j/slf4j-nop     {:mvn/version "1.7.32"}}
    :main-opts     ["-m" "antq.core"]}
 
@@ -509,15 +509,15 @@
   ;; https://github.com/djblue/portal
 
   :inspect/portal-cli
-  {:extra-deps {djblue/portal {:mvn/version "0.14.0"}}}
+  {:extra-deps {djblue/portal {:mvn/version "0.16.3"}}}
 
   :inspect/portal-web
-  {:extra-deps {djblue/portal             {:mvn/version "0.14.0"}
+  {:extra-deps {djblue/portal             {:mvn/version "0.16.3"}
                 org.clojure/clojurescript {:mvn/version "1.10.879"}}
    :main-opts  ["-m" "cljs.main"]}
 
   :inspect/portal-node
-  {:extra-deps {djblue/portal             {:mvn/version "0.14.0"}
+  {:extra-deps {djblue/portal             {:mvn/version "0.16.3"}
                 org.clojure/clojurescript {:mvn/version "1.10.879"}}
    :main-opts  ["-m" "cljs.main" "-re" "node"]}
 
@@ -564,14 +564,14 @@
   ;; -Dvlaaad.reveal.prefs={:theme,:light,:font-family,"JetBrains Mono",:font-size,14}
 
   :inspect/reveal
-  {:extra-deps {vlaaad/reveal                     {:mvn/version "1.3.214"}
+  {:extra-deps {vlaaad/reveal                     {:mvn/version "1.3.226"}
                 com.phronemophobic/reveal-treemap {:mvn/version "0.1.6"}}
    :ns-default vlaaad.reveal
    :exec-fn    repl
    :main-opts  ["-m" "vlaaad.reveal" "repl"]}
 
   :inspect/reveal-light
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.214"}}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.226"}}
    :ns-default vlaaad.reveal
    :exec-fn    repl
    :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
@@ -582,14 +582,14 @@
   ;; clojure -M:inspect/reveal-rebel
   :inspect/reveal-rebel
   {:extra-deps
-   {vlaaad/reveal              {:mvn/version "1.3.214"}
+   {vlaaad/reveal              {:mvn/version "1.3.226"}
     com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
    :main-opts ["-e" "(require,'rebel-readline.core),(require,'rebel-readline.clojure.line-reader),(require,'rebel-readline.clojure.service.local),(require,'rebel-readline.clojure.main),(require,'vlaaad.reveal)(rebel-readline.core/with-line-reader,(rebel-readline.clojure.line-reader/create,(rebel-readline.clojure.service.local/create)),(vlaaad.reveal/repl,:prompt,(fn,[]),:read,(rebel-readline.clojure.main/create-repl-read)))"]}
 
   ;; clojure -M:inspect/reveal-light-rebel
   :inspect/reveal-light-rebel
   {:extra-deps
-   {vlaaad/reveal              {:mvn/version "1.3.214"}
+   {vlaaad/reveal              {:mvn/version "1.3.226"}
     com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
    :jvm-opts  ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"https://ff.static.1001fonts.net/u/b/ubuntu.mono.ttf\",:font-size,32}"]
    :main-opts ["-e" "(require,'rebel-readline.core),(require,'rebel-readline.clojure.line-reader),(require,'rebel-readline.clojure.service.local),(require,'rebel-readline.clojure.main),(require,'vlaaad.reveal)(rebel-readline.core/with-line-reader,(rebel-readline.clojure.line-reader/create,(rebel-readline.clojure.service.local/create)),(vlaaad.reveal/repl,:prompt,(fn,[]),:read,(rebel-readline.clojure.main/create-repl-read)))"]}
@@ -609,14 +609,14 @@
   ;; Reveal REPL with nrepl server, connect to from a Clojure aware editor
   ;; clj -M:inspect/reveal-nrepl
   :inspect/reveal-nrepl
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.214"}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.226"}
                 nrepl/nrepl   {:mvn/version "0.8.3"}}
    :main-opts  ["-m" "nrepl.cmdline"
                 "--middleware" "[vlaaad.reveal.nrepl/middleware]"]}
 
   ;; Light version of :inspect/reveal-nrepl
   :inspect/reveal-light-nrepl
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.214"}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.226"}
                 nrepl/nrepl   {:mvn/version "0.8.3"}}
    :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
    :main-opts  ["-m" "nrepl.cmdline"
@@ -626,7 +626,7 @@
   ;; Use with `C-u cider-jack-in-clj` or `SPC u , '` on Spacemacs
   ;; Edit jack-in command: clojure -M:inspect/reveal-nrepl-cider
   :inspect/reveal-nrepl-cider
-  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.214"}
+  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.226"}
                 nrepl/nrepl                   {:mvn/version "0.8.3"}
                 cider/cider-nrepl             {:mvn/version "0.26.0"}
                 refactor-nrepl/refactor-nrepl {:mvn/version "3.0.0-pr301"}}
@@ -635,7 +635,7 @@
 
   ;; Light version of :inspect/reveal-nrepl-cider
   :inspect/reveal-light-nrepl-cider
-  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.214"}
+  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.226"}
                 nrepl/nrepl                   {:mvn/version "0.8.3"}
                 cider/cider-nrepl             {:mvn/version "0.26.0"}
                 refactor-nrepl/refactor-nrepl {:mvn/version "3.0.0-pr301"}}
@@ -645,7 +645,7 @@
 
   :inspect.reveal/prepl
   {:replace-paths []
-   :replace-deps  {vlaaad/reveal                     {:mvn/version "1.3.214"}
+   :replace-deps  {vlaaad/reveal                     {:mvn/version "1.3.226"}
                    com.phronemophobic/reveal-treemap {:mvn/version "0.1.6"}}
    :jvm-opts      ["-Dvlaaad.reveal.prefs={:theme :light :font-family \"JetBrains Mono\" :font-size 15}"]
    :main-opts     ["-m" "vlaaad.reveal" "remote-prepl" ":out-fn" "clojure.core/identity" ":port"]}
@@ -798,20 +798,20 @@
   ;; clojure -M:test/runner
   :test/runner
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.0.887"}}
+   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.60.945"}}
    :main-opts   ["-m" "kaocha.runner"]}
 
   ;; clojure -M:test/kaocha
   :test/kaocha
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.0.887"}}
+   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.60.945"}}
    :main-opts   ["-m" "kaocha.runner"]}
 
 
   ;; clojure -M:test/kaocha-cljs
   :test/kaocha-cljs
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha      {:mvn/version "1.0.887"}
+   :extra-deps  {lambdaisland/kaocha      {:mvn/version "1.60.945"}
                  lambdaisland/kaocha-cljs {:mvn/version "1.0.107"}}
    :main-opts   ["-m" "kaocha.runner"]}
 
@@ -819,7 +819,7 @@
   ;; clojure -M:test/kaocha-cucumber
   :test/kaocha-cucumber
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha          {:mvn/version "1.0.887"}
+   :extra-deps  {lambdaisland/kaocha          {:mvn/version "1.60.945"}
                  lambdaisland/kaocha-cucumber {:mvn/version "0.0.53"}}
    :main-opts   ["-m" "kaocha.runner"]}
 
@@ -827,7 +827,7 @@
   ;; clojure -M:test/kaocha-junit-xml
   :test/kaocha-junit-xml
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha           {:mvn/version "1.0.887"}
+   :extra-deps  {lambdaisland/kaocha           {:mvn/version "1.60.945"}
                  lambdaisland/kaocha-junit-xml {:mvn/version "0.0.76"}}
    :main-opts   ["-m" "kaocha.runner"]}
 
@@ -836,7 +836,7 @@
   ;; clojure -M:test/kaocha-cloverage
   :test/kaocha-cloverage
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha           {:mvn/version "1.0.887"}
+   :extra-deps  {lambdaisland/kaocha           {:mvn/version "1.60.945"}
                  lambdaisland/kaocha-cloverage {:mvn/version "1.0.75"}}
    :main-opts   ["-m" "kaocha.runner"]}
 
@@ -872,7 +872,7 @@
   ;; clj-kondo - comprehensive and fast linter
   ;; https://github.com/borkdude/clj-kondo/
   :lint/clj-kondo
-  {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2021.08.06"}}
+  {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2021.10.19"}}
    :main-opts  ["-m" "clj-kondo.main" "--lint" "src"]}
 
 
@@ -1027,7 +1027,7 @@
   ;; recommend depstar until that is migrated into tools.build
   :project/uberdeps
   {:replace-paths []
-   :replace-deps  {uberdeps/uberdeps {:mvn/version "1.0.4"}}
+   :replace-deps  {uberdeps/uberdeps {:mvn/version "1.1.0"}}
    :main-opts     ["-m" "uberdeps.uberjar"]}
 
   ;; End of Deprecated
