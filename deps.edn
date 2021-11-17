@@ -1130,6 +1130,10 @@
   :imre/speculative
   {:extra-deps {speculative/speculative {:mvn/version "0.0.3"}}}
 
+  :imre/profile
+  {:extra-deps {com.clojure-goes-fast/clj-async-profiler {:mvn/version "1.0.0-alpha1"}}
+   :jvm-opts   ["-Djdk.attach.allowAttachSelf" "-XX:+UnlockDiagnosticVMOptions" "-XX:+DebugNonSafepoints"]}
+
   :imre/tools.namespace
   {:extra-deps {org.clojure/tools.namespace {:mvn/version "1.1.0"}}}} ;; End of alias definitions
 
