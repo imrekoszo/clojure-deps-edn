@@ -23,7 +23,7 @@
  ;; Directories to include in the classpath to run the application
  ;; Development only paths should be defined in aliases, eg. :env/dev
  ;; Project deps.edn file superceeds this setting
- :paths ["src"]
+ ;; :paths ["src"]
 
  ;; End of: Default Paths
  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
