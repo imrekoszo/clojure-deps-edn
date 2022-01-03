@@ -136,7 +136,7 @@
   ;; Run a Clojure repl with reveal and nrepl interactively
   ;; clj -M:repl/reveal-nrepl
   :repl/reveal-nrepl
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.251"}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.263"}
                 nrepl/nrepl   {:mvn/version "0.9.0"}}
    :main-opts  ["-m" "nrepl.cmdline"
                 "--middleware" "[vlaaad.reveal.nrepl/middleware]"
@@ -146,7 +146,7 @@
   ;; Replace font-family with local font (should be slightly faster startup)
   ;; clj -M:repl/reveal-light-nrepl
   :repl/reveal-light-nrepl
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.251"}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.263"}
                 nrepl/nrepl   {:mvn/version "0.9.0"}}
    :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
    :main-opts  ["-m" "nrepl.cmdline"
@@ -158,7 +158,7 @@
   ;; clojure -M:repl/rebel-reveal
   :repl/rebel-reveal
   {:extra-deps
-   {vlaaad/reveal              {:mvn/version "1.3.251"}
+   {vlaaad/reveal              {:mvn/version "1.3.263"}
     com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
    :jvm-opts  ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
    :main-opts ["-e" "(require,'rebel-readline.core),(require,'rebel-readline.clojure.line-reader),(require,'rebel-readline.clojure.service.local),(require,'rebel-readline.clojure.main),(require,'vlaaad.reveal)(rebel-readline.core/with-line-reader,(rebel-readline.clojure.line-reader/create,(rebel-readline.clojure.service.local/create)),(vlaaad.reveal/repl,:prompt,(fn,[]),:read,(rebel-readline.clojure.main/create-repl-read)))"]}
@@ -272,14 +272,14 @@
   ;; clojure -X:project/new :template luminus :name practicalli/full-stack-app +http-kit +h2 +reagent +auth
 
   :project/new
-  {:replace-deps {com.github.seancorfield/clj-new {:mvn/version "1.2.380"}}
+  {:replace-deps {com.github.seancorfield/clj-new {:mvn/version "1.2.381"}}
    :exec-fn      clj-new/create
    :exec-args    {:template lib :name practicalli/playground}
    :main-opts    ["-m" "clj-new.create"]}
 
   ;; ALPHA status: Add 'something' to existing project (subject to change)
   :project/add
-  {:replace-deps {com.github.seancorfield/clj-new {:mvn/version "1.2.380"}}
+  {:replace-deps {com.github.seancorfield/clj-new {:mvn/version "1.2.381"}}
    :exec-fn      clj-new/generate
    :main-opts    ["-m" "clj-new.generate"]}
 
@@ -571,7 +571,7 @@
                 ;; deps for file datafication (REBL 0.9.149 or later)
                 org.clojure/data.csv        {:mvn/version "1.0.0"}
                 org.clojure/data.json       {:mvn/version "2.4.0"}
-                org.yaml/snakeyaml          {:mvn/version "1.29"}}
+                org.yaml/snakeyaml          {:mvn/version "1.30"}}
    :main-opts  ["-m" "cognitect.rebl"]}
 
   :inspect/rebl-java8
@@ -594,7 +594,7 @@
   ;; -Dvlaaad.reveal.prefs={:theme,:light,:font-family,"JetBrains Mono",:font-size,14}
 
   :inspect/reveal
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.251"}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.263"}
                 com.phronemophobic/reveal-treemap
                 {:mvn/version "0.1.6"}}
    :ns-default vlaaad.reveal
@@ -602,7 +602,7 @@
    :main-opts  ["-m" "vlaaad.reveal" "repl"]}
 
   :inspect/reveal-light
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.251"}}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.263"}}
    :ns-default vlaaad.reveal
    :exec-fn    repl
    :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
@@ -613,14 +613,14 @@
   ;; clojure -M:inspect/reveal-rebel
   :inspect/reveal-rebel
   {:extra-deps
-   {vlaaad/reveal              {:mvn/version "1.3.251"}
+   {vlaaad/reveal              {:mvn/version "1.3.263"}
     com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
    :main-opts ["-e" "(require,'rebel-readline.core),(require,'rebel-readline.clojure.line-reader),(require,'rebel-readline.clojure.service.local),(require,'rebel-readline.clojure.main),(require,'vlaaad.reveal)(rebel-readline.core/with-line-reader,(rebel-readline.clojure.line-reader/create,(rebel-readline.clojure.service.local/create)),(vlaaad.reveal/repl,:prompt,(fn,[]),:read,(rebel-readline.clojure.main/create-repl-read)))"]}
 
   ;; clojure -M:inspect/reveal-light-rebel
   :inspect/reveal-light-rebel
   {:extra-deps
-   {vlaaad/reveal              {:mvn/version "1.3.251"}
+   {vlaaad/reveal              {:mvn/version "1.3.263"}
     com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
    :jvm-opts  ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
    :main-opts ["-e" "(require,'rebel-readline.core),(require,'rebel-readline.clojure.line-reader),(require,'rebel-readline.clojure.service.local),(require,'rebel-readline.clojure.main),(require,'vlaaad.reveal)(rebel-readline.core/with-line-reader,(rebel-readline.clojure.line-reader/create,(rebel-readline.clojure.service.local/create)),(vlaaad.reveal/repl,:prompt,(fn,[]),:read,(rebel-readline.clojure.main/create-repl-read)))"]}
@@ -630,7 +630,7 @@
   ;; :repl/reveal-rebel-nrepl
   ;; {:extra-deps {nrepl/nrepl                {:mvn/version "0.9.0"}
   ;;               cider/cider-nrepl          {:mvn/version "0.27.4"}
-  ;;               vlaaad/reveal              {:mvn/version "1.3.251"}
+  ;;               vlaaad/reveal              {:mvn/version "1.3.263"}
   ;;               com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
   ;;  :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
   ;;  :main-opts  ["-m" "nrepl.cmdline"
@@ -640,14 +640,14 @@
   ;; Reveal REPL with nrepl server, connect to from a Clojure aware editor
   ;; clj -M:inspect/reveal-nrepl
   :inspect/reveal-nrepl
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.251"}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.263"}
                 nrepl/nrepl   {:mvn/version "0.9.0"}}
    :main-opts  ["-m" "nrepl.cmdline"
                 "--middleware" "[vlaaad.reveal.nrepl/middleware]"]}
 
   ;; Light version of :inspect/reveal-nrepl
   :inspect/reveal-light-nrepl
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.251"}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.263"}
                 nrepl/nrepl   {:mvn/version "0.9.0"}}
    :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
    :main-opts  ["-m" "nrepl.cmdline"
@@ -657,7 +657,7 @@
   ;; Use with `C-u cider-jack-in-clj` or `SPC u , '` on Spacemacs
   ;; Edit jack-in command: clojure -M:inspect/reveal-nrepl-cider
   :inspect/reveal-nrepl-cider
-  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.251"}
+  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.263"}
                 nrepl/nrepl                   {:mvn/version "0.9.0"}
                 cider/cider-nrepl             {:mvn/version "0.27.4"}
                 refactor-nrepl/refactor-nrepl {:mvn/version "3.1.0"}}
@@ -666,7 +666,7 @@
 
   ;; Light version of :inspect/reveal-nrepl-cider
   :inspect/reveal-light-nrepl-cider
-  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.251"}
+  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.263"}
                 nrepl/nrepl                   {:mvn/version "0.9.0"}
                 cider/cider-nrepl             {:mvn/version "0.27.4"}
                 refactor-nrepl/refactor-nrepl {:mvn/version "3.1.0"}}
@@ -676,7 +676,7 @@
 
   :inspect.reveal/prepl
   {:replace-paths []
-   :replace-deps  {vlaaad/reveal                     {:mvn/version "1.3.251"}
+   :replace-deps  {vlaaad/reveal                     {:mvn/version "1.3.263"}
                    com.phronemophobic/reveal-treemap {:mvn/version "0.1.6"}}
    :jvm-opts      ["-Dvlaaad.reveal.prefs={:theme :light :font-family \"JetBrains Mono\" :font-size 15}"]
    :main-opts     ["-m" "vlaaad.reveal" "remote-prepl" ":out-fn" "clojure.core/identity" ":port"]}
@@ -753,7 +753,7 @@
   ;; Clojure spec test.check (clojure spec included in Clojure 1.9 onwards)
   :lib/spec-test
   {:extra-deps
-   {org.clojure/test.check {:mvn/version "1.1.0"}}}
+   {org.clojure/test.check {:mvn/version "1.1.1"}}}
 
 
   ;; Clojure spec 2 - under active development
@@ -830,7 +830,7 @@
   ;; clojure -M:test/run
   :test/run
   {:extra-paths ["test"]
-   :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.972"}}
+   :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.977"}}
    :main-opts   ["-m" "kaocha.runner"]
    :exec-fn kaocha.runner/exec-fn
    :exec-args {}}
@@ -839,7 +839,7 @@
   ;; clojure -X:test/watch
   :test/watch
   {:extra-paths ["test"]
-   :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.972"}}
+   :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.977"}}
    :main-opts   ["-m" "kaocha.runner" "--watch" "--fail-fast" "--skip-meta" ":slow"]
    :exec-fn kaocha.runner/exec-fn
    ;; exec-args seem to be ignored currently
@@ -850,7 +850,7 @@
   ;; Experiment: test using alternative configuration
   :test/kaocha-global
   {:extra-paths ["test"]
-   :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.972"}}
+   :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.977"}}
    :exec-fn kaocha.runner/exec-fn
    :exec-args {:config-file ["~/.clojure/kaocha-global-tests.edn"]}}
 
@@ -858,7 +858,7 @@
   ;; clojure -M:test/kaocha
   :test/kaocha
   {:extra-paths ["test"]
-   :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.972"}}
+   :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.977"}}
    :main-opts   ["-m" "kaocha.runner"]
    :exec-fn kaocha.runner/exec-fn
    :exec-args {}}
@@ -867,7 +867,7 @@
   ;; clojure -M:test/kaocha-watch
   :test/kaocha-watch
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.60.972"}}
+   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.60.977"}}
    :main-opts   ["-m" "kaocha.runner" "--watch" "--fail-fast" "--skip-meta" ":slow"]
    :exec-fn kaocha.runner/exec-fn
    ;; exec-args seem to be ignored currently
@@ -878,7 +878,7 @@
   ;; clojure -M:test/kaocha-cljs
   :test/kaocha-cljs
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha      {:mvn/version "1.60.972"}
+   :extra-deps  {lambdaisland/kaocha      {:mvn/version "1.60.977"}
                  lambdaisland/kaocha-cljs {:mvn/version "1.0.107"}}
    :main-opts   ["-m" "kaocha.runner"]}
 
@@ -886,7 +886,7 @@
   ;; clojure -M:test/kaocha-cucumber
   :test/kaocha-cucumber
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha          {:mvn/version "1.60.972"}
+   :extra-deps  {lambdaisland/kaocha          {:mvn/version "1.60.977"}
                  lambdaisland/kaocha-cucumber {:mvn/version "0.0.53"}}
    :main-opts   ["-m" "kaocha.runner"]}
 
@@ -894,7 +894,7 @@
   ;; clojure -M:test/kaocha-junit-xml
   :test/kaocha-junit-xml
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha           {:mvn/version "1.60.972"}
+   :extra-deps  {lambdaisland/kaocha           {:mvn/version "1.60.977"}
                  lambdaisland/kaocha-junit-xml {:mvn/version "0.0.76"}}
    :main-opts   ["-m" "kaocha.runner"]}
 
@@ -902,7 +902,7 @@
   ;; clojure -M:test/kaocha-cloverage
   :test/kaocha-cloverage
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha           {:mvn/version "1.60.972"}
+   :extra-deps  {lambdaisland/kaocha           {:mvn/version "1.60.977"}
                  lambdaisland/kaocha-cloverage {:mvn/version "1.0.75"}}
    :main-opts   ["-m" "kaocha.runner"]}
 
@@ -938,7 +938,7 @@
   ;; clj-kondo - comprehensive and fast linter
   ;; https://github.com/borkdude/clj-kondo/
   :lint/clj-kondo
-  {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2021.12.16"}}
+  {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2021.12.19"}}
    :main-opts  ["-m" "clj-kondo.main" "--lint" "src"]}
 
 
@@ -1182,7 +1182,7 @@
    :main-opts  ["-m" "closh.zero.frontend.rebel"]}
 
   :imre/aviso-pretty
-  {:extra-deps {io.aviso/pretty {:mvn/version "1.1"}}}
+  {:extra-deps {io.aviso/pretty {:mvn/version "1.1.1"}}}
 
   :imre/hashp
   {:extra-deps {hashp/hashp {:mvn/version "0.2.1"}}}
@@ -1216,7 +1216,7 @@
    :jvm-opts   ["-Djdk.attach.allowAttachSelf" "-XX:+UnlockDiagnosticVMOptions" "-XX:+DebugNonSafepoints"]}
 
   :imre/tools.namespace
-  {:extra-deps {org.clojure/tools.namespace {:mvn/version "1.1.0"}}}} ;; End of alias definitions
+  {:extra-deps {org.clojure/tools.namespace {:mvn/version "1.2.0"}}}} ;; End of alias definitions
 
 
  ;; Library Repositories
