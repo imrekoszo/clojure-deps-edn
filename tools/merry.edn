@@ -1,0 +1,5 @@
+{:lib com.github.liquidz/clj-xmas,
+ :coord
+ {:git/tag "1.0.0",
+  :git/sha "c399dd472c696cf265b989762b9ed4d6361817c3",
+  :git/url "https://github.com/liquidz/clj-xmas.git"}}
