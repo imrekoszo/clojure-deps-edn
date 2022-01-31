@@ -53,6 +53,7 @@ luminus
 nasus
 nrebl
 nrepl
+minimise
 practicalli
 prefs
 prepl
@@ -63,6 +64,9 @@ sonatype
 uberdeps
 uberjar
 uberjars
+viins
+Visualise
+visualising
 visualisation
 vlaaad
 wallboards

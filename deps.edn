@@ -47,7 +47,7 @@
   ;; Run interactive REPL with nREPL connection
   ;; NOTE: For non-interactive REPL session, use :middleware versions
 
-  ;;;; Simple nREPL server with no additional libraries
+  ;;;; Simple nREPL server with no additional libraries, headless
   :repl/nrepl
   {:extra-deps {nrepl/nrepl                {:mvn/version "0.9.0"}}
    :main-opts  ["-m" "nrepl.cmdline"]}
@@ -69,22 +69,22 @@
                 "--middleware" "[refactor-nrepl.middleware/wrap-refactor,cider.nrepl/cider-middleware]"
                 "-i"]}
 
-  ;; clojure -M:repl/cljs-nrepl
-  :repl/cljs-nrepl
-  {:extra-deps {org.clojure/clojurescript {:mvn/version "1.10.893"}
-                nrepl/nrepl               {:mvn/version "0.9.0"}
-                cider/cider-nrepl         {:mvn/version "0.27.4"}
-                cider/piggieback          {:mvn/version "0.5.3"}}
+  ;; clojure -M:repl/cider-cljs
+  :repl/cider-cljs
+  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.10.773"}
+                nrepl/nrepl                     {:mvn/version "0.9.0"}
+                cider/cider-nrepl               {:mvn/version "0.27.4"}
+                cider/piggieback                {:mvn/version "0.5.3"}}
    :main-opts  ["-m" "nrepl.cmdline"
                 "-i"
                 "--middleware" "[cider.nrepl/cider-middleware,cider.piggieback/wrap-cljs-repl]"]}
 
-  :repl/cljs-figwheel
-  {:extra-deps {org.clojure/clojurescript {:mvn/version "1.10.893"}
-                com.bhauman/figwheel-main {:mvn/version "0.2.15"}
-                nrepl/nrepl               {:mvn/version "0.9.0"}
-                cider/cider-nrepl         {:mvn/version "0.27.4"}
-                cider/piggieback          {:mvn/version "0.5.3"}}
+  :repl/figwheel
+  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.10.773"}
+                com.bhauman/figwheel-main       {:mvn/version "0.2.15"}
+                nrepl/nrepl                     {:mvn/version "0.9.0"}
+                cider/cider-nrepl               {:mvn/version "0.27.4"}
+                cider/piggieback                {:mvn/version "0.5.3"}}
    :main-opts  ["-m" "nrepl.cmdline"
                 "-i"
                 "--middleware" "[cider.nrepl/cider-middleware,cider.piggieback/wrap-cljs-repl]"]}
@@ -118,9 +118,9 @@
 
 
   ;; Requires nashorn in a version of ClojureScript
-  ;; WARNING: stack trace - does not run
-  :repl/rebel-cljs-figwheel
-  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.9.946"}  ;; version contains cljs.repl.nashorn
+  ;; WARNING: stack trace - does not run TO DEPRECATE
+  :repl/rebel-figwheel
+  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.9.946"} ;; version contains cljs.repl.nashorn
                 nrepl/nrepl                     {:mvn/version "0.9.0"}
                 com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
                 com.bhauman/figwheel-main       {:mvn/version "0.2.15"}
@@ -191,8 +191,8 @@
   ;; replace --host and --port values with that of remote nREPL server
   :repl/remote
   {:extra-deps {nrepl/nrepl {:mvn/version "0.9.0"}}
-   :main-opts  ["-m" "nrepl.cmdline"
-                "--connect"]}
+   :main-opts ["-m" "nrepl.cmdline"
+               "--connect"]}
 
   ;; clojure -M:repl/rebel-remote --host hostname --port 12345
   :repl/rebel-remote
@@ -312,19 +312,16 @@
      :sha     "9bf23a52cb0a8190c9c2c7ad1d796da802f8ce7a"}}
    :main-opts ["-m" "find-deps.core"]}
 
-
   ;; Visualizing dependencies in a project
   ;; https://github.com/clojure/tools.deps.graph
-  ;; clojure -X:project/graph-deps
+  ;; clojure -T:project/graph-deps
   :project/graph-deps
   {:replace-paths []
    :replace-deps  {org.clojure/tools.deps.graph {:mvn/version "1.1.68"}}
-   :main-opts     ["-m" "clojure.tools.deps.graph"] ;; deprecated
    :ns-default    clojure.tools.deps.graph
    :exec-fn       graph
    :exec-args     {:output "project-dependencies-graph.png"
                    :size   true}}
-
 
   ;; Dependency version management
   ;; https://github.com/liquidz/antq
@@ -356,7 +353,7 @@
   :hack/antq
   {:replace-deps
    {antq/antq {:local/root "/home/practicalli/projects/clojure/community-tools/antq"}}
-   :main-opts     ["-m" "antq.core"]}
+   :main-opts ["-m" "antq.core"]}
 
   ;; https://github.com/Olical/depot
   ;; keeping this here for its --aliases and --every flags
@@ -477,18 +474,27 @@
   ;; Java Sources
 
   ;; Look up Java Class and method definitions, eg. `cider-find-var` in Emacs
-  ;; Requires: Java sources installed locally
+  ;; Requires: Java sources installed locally e.g. sudo apt install openjdk-17-source
   ;; Examples are from Ubuntu package install locations
 
-  ;; clojure -M:lib/java11-source
-  :lib/java8-source
+  ;; clojure -M:lib/java17-source
+  :src/java8
   {:extra-deps
    {openjdk/java-sources {:local/root "/usr/lib/jvm/openjdk-8/lib/src.zip"}}}
 
-  :lib/java11-source
+  :src/java11
   {:extra-deps
    {openjdk/java-sources {:local/root "/usr/lib/jvm/openjdk-11/lib/src.zip"}}}
 
+  :src/java17
+  {:extra-deps
+   {openjdk/java-sources {:local/root "/usr/lib/jvm/openjdk-17/lib/src.zip"}}}
+
+  ;; Clojure core Java source code in src/jvm/clojure/lang/
+  :src/clojure
+  {:extra-paths ["src/jvm"]
+   :extra-deps
+   {org.clojure/source {:local/root "~/projects/community/clojure.org/clojure"}}}
   ;; End of: Java Sources
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -774,10 +780,12 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Testing frameworks
 
-  ;; Include the test directory as a path used by Clojure CLI tools
+  ;; Include the test directory on the class path
+  ;; Humane test output for pretty printed results
   :env/test
   {:extra-paths ["test"]
-   :extra-deps  {org.clojure/test.check {:mvn/version "1.1.1"}}}
+   :extra-deps  {pjstadig/humane-test-output {:mvn/version "0.11.0"}
+                 org.clojure/test.check {:mvn/version "1.1.1"}}}
 
   :lib/ring-mock
   {:extra-deps {ring/ring-mock         {:mvn/version "0.4.0"}}}
@@ -827,7 +835,6 @@
 
   ;; Default test runner using kaocha (change to your own preference)
   ;; clojure -X:test/run
-  ;; clojure -M:test/run
   :test/run
   {:extra-paths ["test"]
    :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.977"}}
@@ -842,7 +849,6 @@
    :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.977"}}
    :main-opts   ["-m" "kaocha.runner" "--watch" "--fail-fast" "--skip-meta" ":slow"]
    :exec-fn kaocha.runner/exec-fn
-   ;; exec-args seem to be ignored currently
    :exec-args {:watch? true
                :randomize? false
                :fail-fast? true}}
@@ -855,7 +861,6 @@
    :exec-args {:config-file ["~/.clojure/kaocha-global-tests.edn"]}}
 
   ;; clojure -X:test/kaocha
-  ;; clojure -M:test/kaocha
   :test/kaocha
   {:extra-paths ["test"]
    :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.977"}}
@@ -864,13 +869,11 @@
    :exec-args {}}
 
   ;; clojure -X:test/kaocha-watch
-  ;; clojure -M:test/kaocha-watch
   :test/kaocha-watch
   {:extra-paths ["test"]
    :extra-deps  {lambdaisland/kaocha {:mvn/version "1.60.977"}}
    :main-opts   ["-m" "kaocha.runner" "--watch" "--fail-fast" "--skip-meta" ":slow"]
    :exec-fn kaocha.runner/exec-fn
-   ;; exec-args seem to be ignored currently
    :exec-args {:watch? true
                :randomize? false
                :fail-fast? true}}
@@ -879,32 +882,13 @@
   :test/kaocha-cljs
   {:extra-paths ["test"]
    :extra-deps  {lambdaisland/kaocha      {:mvn/version "1.60.977"}
-                 lambdaisland/kaocha-cljs {:mvn/version "1.0.107"}}
-   :main-opts   ["-m" "kaocha.runner"]}
+                 lambdaisland/kaocha-cljs {:mvn/version "1.0.113"}}
+   :main-opts   ["-m" "kaocha.runner" "unit-cljs"]}
 
-  ;; https://github.com/lambdaisland/kaocha-cucumber
-  ;; clojure -M:test/kaocha-cucumber
-  :test/kaocha-cucumber
-  {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha          {:mvn/version "1.60.977"}
-                 lambdaisland/kaocha-cucumber {:mvn/version "0.0.53"}}
-   :main-opts   ["-m" "kaocha.runner"]}
-
-  ;; https://github.com/lambdaisland/kaocha-junit-xml
-  ;; clojure -M:test/kaocha-junit-xml
-  :test/kaocha-junit-xml
-  {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha           {:mvn/version "1.60.977"}
-                 lambdaisland/kaocha-junit-xml {:mvn/version "0.0.76"}}
-   :main-opts   ["-m" "kaocha.runner"]}
-
-  ;; https://github.com/lambdaisland/kaocha-cloverage
-  ;; clojure -M:test/kaocha-cloverage
-  :test/kaocha-cloverage
-  {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha           {:mvn/version "1.60.977"}
-                 lambdaisland/kaocha-cloverage {:mvn/version "1.0.75"}}
-   :main-opts   ["-m" "kaocha.runner"]}
+  ;; https://github.com/lambdaisland/kaocha-cucumbe
+  ;; - used for kaocha-runner.el to run Kaocha test runner in Emacs Cider
+  :lib/kaocha
+  {:extra-deps {lambdaisland/kaocha {:mvn/version "1.60.977"}}}
 
   ;; End of Test runners
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1080,10 +1064,11 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Security
 
+  ;; DEPRECATED
   ;; https://github.com/rm-hull/nvd-clojure
   ;; check all the jars in the classpath for known security vulnerabilities using the
   ;; National Vulnerability Database
-  ;; clojure -M:security/nvd "" "$(clojure -Spath)"
+  ;; clojure -T:security/nvd "" "$(clojure -Spath)"
   :security/nvd
   {:extra-deps {nvd-clojure/nvd-clojure {:mvn/version "1.9.0"}}
    :main-opts ["-m" "nvd.task.check"]}
