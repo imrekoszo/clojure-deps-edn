@@ -82,7 +82,7 @@
 
   ;; clojure -M:repl/cider-cljs
   :repl/cider-cljs
-  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.10.773"}
+  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.11.4"}
                 nrepl/nrepl                     {:mvn/version "0.9.0"}
                 cider/cider-nrepl               {:mvn/version "0.28.3"}
                 cider/piggieback                {:mvn/version "0.5.3"}}
@@ -91,7 +91,7 @@
                 "--middleware" "[cider.nrepl/cider-middleware,cider.piggieback/wrap-cljs-repl]"]}
 
   :repl/figwheel
-  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.10.773"}
+  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.11.4"}
                 com.bhauman/figwheel-main       {:mvn/version "0.2.16"}
                 nrepl/nrepl                     {:mvn/version "0.9.0"}
                 cider/cider-nrepl               {:mvn/version "0.28.3"}
@@ -129,7 +129,7 @@
   ;; Requires nashorn in a version of ClojureScript
   ;; WARNING: stack trace - does not run TO DEPRECATE
   :repl/rebel-figwheel
-  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.9.946"} ;; version contains cljs.repl.nashorn
+  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.11.4"} ;; version contains cljs.repl.nashorn
                 nrepl/nrepl                     {:mvn/version "0.9.0"}
                 com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
                 com.bhauman/figwheel-main       {:mvn/version "0.2.16"}
@@ -146,7 +146,7 @@
   ;; clojure -M:repl/rebel-reveal
   :repl/rebel-reveal
   {:extra-deps
-   {vlaaad/reveal              {:mvn/version "1.3.270"}
+   {vlaaad/reveal              {:mvn/version "1.3.272"}
     com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
    :jvm-opts  ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"https://ff.static.1001fonts.net/u/b/ubuntu.mono.ttf\",:font-size,32}"]
    :main-opts ["-e" "(require,'rebel-readline.core),(require,'rebel-readline.clojure.line-reader),(require,'rebel-readline.clojure.service.local),(require,'rebel-readline.clojure.main),(require,'vlaaad.reveal)(rebel-readline.core/with-line-reader,(rebel-readline.clojure.line-reader/create,(rebel-readline.clojure.service.local/create)),(vlaaad.reveal/repl,:prompt,(fn,[]),:read,(rebel-readline.clojure.main/create-repl-read)))"]}
@@ -155,7 +155,7 @@
   ;; clojure -M:repl/reveal-light-rebel
   :repl/rebel-reveal-light
   {:extra-deps
-   {vlaaad/reveal              {:mvn/version "1.3.270"}
+   {vlaaad/reveal              {:mvn/version "1.3.272"}
     com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
    :jvm-opts  ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
    :main-opts ["-e" "(require,'rebel-readline.core),(require,'rebel-readline.clojure.line-reader),(require,'rebel-readline.clojure.service.local),(require,'rebel-readline.clojure.main),(require,'vlaaad.reveal)(rebel-readline.core/with-line-reader,(rebel-readline.clojure.line-reader/create,(rebel-readline.clojure.service.local/create)),(vlaaad.reveal/repl,:prompt,(fn,[]),:read,(rebel-readline.clojure.main/create-repl-read)))"]}
@@ -324,7 +324,7 @@
   ;; cd ~/.clojure && clojure -T:project/outdated
   :project/outdated
   {:replace-paths ["."]
-   :replace-deps  {com.github.liquidz/antq {:mvn/version "1.5.1"}
+   :replace-deps  {com.github.liquidz/antq {:mvn/version "1.6.0"}
                    org.slf4j/slf4j-nop     {:mvn/version "1.7.36"}}
    :exec-fn antq.tool/outdated
    :exec-args {:directory ["."] ; default
@@ -526,12 +526,12 @@
 
   :inspect/portal-web
   {:extra-deps {djblue/portal             {:mvn/version "0.21.2"}
-                org.clojure/clojurescript {:mvn/version "1.10.844"}}
+                org.clojure/clojurescript {:mvn/version "1.11.4"}}
    :main-opts  ["-m" "cljs.main"]}
 
   :inspect/portal-node
   {:extra-deps {djblue/portal             {:mvn/version "0.21.2"}
-                org.clojure/clojurescript {:mvn/version "1.10.844"}}
+                org.clojure/clojurescript {:mvn/version "1.11.4"}}
    :main-opts  ["-m" "cljs.main" "-re" "node"]}
 
   ;; REBL Data browser - TO DEPRECATE
@@ -544,7 +544,7 @@
 
   :inspect/rebl
   {:extra-deps {com.cognitect/rebl          {:mvn/version "0.9.242"}
-                org.clojure/core.async      {:mvn/version "1.4.627"}
+                org.clojure/core.async      {:mvn/version "1.5.648"}
                 org.openjfx/javafx-fxml     {:mvn/version "15.0.1"}
                 org.openjfx/javafx-controls {:mvn/version "15.0.1"}
                 org.openjfx/javafx-swing    {:mvn/version "15.0.1"}
@@ -575,12 +575,12 @@
   ;; -Dvlaaad.reveal.prefs={:theme,:light,:font-family,"JetBrains Mono",:font-size,14}
 
   :inspect/reveal
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.270"}}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.272"}}
    :exec-fn    vlaaad.reveal/repl
    :main-opts  ["-m" "vlaaad.reveal" "repl"]}
 
   :inspect/reveal-light
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.270"}}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.272"}}
    :exec-fn    vlaaad.reveal/repl
    :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
    :main-opts  ["-m" "vlaaad.reveal" "repl"]}
@@ -603,14 +603,14 @@
   ;; add the -i flag for interactive REPL client
   ;; Reveal REPL with nrepl server, connect to from a Clojure aware editor
   :inspect/reveal-nrepl
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.270"}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.272"}
                 nrepl/nrepl   {:mvn/version "0.9.0"}}
    :main-opts  ["-m" "nrepl.cmdline"
                 "--middleware" "[vlaaad.reveal.nrepl/middleware]"]}
 
   ;; Light version of :inspect/reveal-nrepl
   :inspect/reveal-light-nrepl
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.270"}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.272"}
                 nrepl/nrepl   {:mvn/version "0.9.0"}}
    :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
    :main-opts  ["-m" "nrepl.cmdline"
@@ -620,7 +620,7 @@
   ;; Use with `C-u cider-jack-in-clj` or `SPC u , '` on Spacemacs
   ;; Edit jack-in command: clojure -M:inspect/reveal-nrepl-cider
   :inspect/reveal-cider
-  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.270"}
+  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.272"}
                 nrepl/nrepl                   {:mvn/version "0.9.0"}
                 cider/cider-nrepl             {:mvn/version "0.28.3"}
                 refactor-nrepl/refactor-nrepl {:mvn/version "3.3.2"}}
@@ -629,7 +629,7 @@
 
   ;; Light version of :inspect/reveal-nrepl-cider
   :inspect/reveal-light-cider
-  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.270"}
+  {:extra-deps {vlaaad/reveal                 {:mvn/version "1.3.272"}
                 nrepl/nrepl                   {:mvn/version "0.9.0"}
                 cider/cider-nrepl             {:mvn/version "0.28.3"}
                 refactor-nrepl/refactor-nrepl {:mvn/version "3.3.2"}}
@@ -639,7 +639,7 @@
 
   :inspect.reveal/prepl
   {:replace-paths []
-   :replace-deps  {vlaaad/reveal                     {:mvn/version "1.3.270"}
+   :replace-deps  {vlaaad/reveal                     {:mvn/version "1.3.272"}
                    com.phronemophobic/reveal-treemap {:mvn/version "0.1.6"}}
    :jvm-opts      ["-Dvlaaad.reveal.prefs={:theme :light :font-family \"JetBrains Mono\" :font-size 15}"]
    :main-opts     ["-m" "vlaaad.reveal" "remote-prepl" ":out-fn" "clojure.core/identity" ":port"]}
@@ -684,7 +684,7 @@
   ;; clojure -M:middleware/cider-cljs
   ;; Using figwheel-main template and cider-connect-cljs: clojure -M:middleware/cider-cljs:fig
   :middleware/cider-cljs
-  {:extra-deps {org.clojure/clojurescript {:mvn/version "1.10.844"}
+  {:extra-deps {org.clojure/clojurescript {:mvn/version "1.11.4"}
                 nrepl/nrepl               {:mvn/version "0.9.0"}
                 cider/cider-nrepl         {:mvn/version "0.28.3"}
                 cider/piggieback          {:mvn/version "0.5.3"}}
@@ -873,7 +873,7 @@
   ;; clj-kondo - comprehensive and fast linter
   ;; https://github.com/borkdude/clj-kondo/
   :lint/clj-kondo
-  {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2022.02.09"}}
+  {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2022.03.09"}}
    :main-opts  ["-m" "clj-kondo.main" "--lint" "src"]}
 
   ;; Eastwood - lint tool based on tools.analyzer.jvm
