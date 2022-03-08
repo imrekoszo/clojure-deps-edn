@@ -28,6 +28,7 @@ The **[Practicalli Clojure book](https://practical.li/clojure)** uses this confi
   * [Databases](#databases-and-drivers)
   * [Data Inspectors](#data-inspectors)
     * [Visualise vars and deps](#visualising-project-vars-and-library-dependencies)
+  * [Debug](#debug-tools)
   * [Services](#services)
 * [Library repositories](#library-repositories)
 * [Experimental](#experimental)
@@ -153,11 +154,12 @@ See [Middleware aliases](#middleware) to run a headless REPL process without a R
 
 Use the `:env/dev` alias with the :repl aliases to include `dev/` in classpath and [configure REPL startup actions using `dev/user.clj`](https://practical.li/clojure/clojure-cli/projects/configure-repl-startup.html)
 
-| Command                         | Description                                                                                                    |
-|---------------------------------|----------------------------------------------------------------------------------------------------------------|
-| `clojure -M:repl/rebel`         | Run a Clojure REPL using Rebel Readline                                                                        |
-| `clojure -M:env/dev:repl/rebel` | Run a Clojure REPL using Rebel Readline, including deps and path from `:env/dev` alias to configure REPL start |
-| `clojure -M:repl/rebel-cljs`    | Run a ClojureScript REPL using Rebel Readline                                                                  |
+| Command                         | Description                                                                  |
+|---------------------------------|------------------------------------------------------------------------------|
+| `clojure -M:repl/rebel`         | Rich terminal UI Clojure REPL using Rebel Readline                           |
+| `clojure -M:env/dev:repl/rebel` | As above, including `:extra-deps` and `:extra-path` from `:env/dev` alias    |
+| `clojure -M:repl/rebel-cljs`    | Rich terminal UI ClojureScript REPL using Rebel Readline                     |
+| `clojure -M:repl/rebel-reveal`  | Rich terminal UI Clojure REPL using Rebel Readline and Reveal data inspector |
 
 `:repl/help` in the Rebel UI for help and available commands.  `:repl/quit` to close the REPL.
 
@@ -283,7 +285,6 @@ Then the project can be run using `clojure -X:project/run` and arguments can opt
 | `clojure -M:project/check`                           | detailed report of compilation errors for a project                     |
 | `clojure -M:project/find-deps library-name`          | fuzzy search Maven & Clojars                                            |
 | `clojure -M:project/find-deps -F:merge library-name` | fuzzy search Maven & Clojars and save to project deps.edn               |
-| `clojure -T:project/graph-deps`                      | generate png image of project dependencies from project `deps.edn` file |
 | `clojure -T:project/outdated`                        | report newer versions for maven and git dependencies                    |
 | `clojure -M:project/outdated-mvn`                    | check for newer dependencies (maven only)                               |
 
@@ -350,6 +351,7 @@ Path to project.jar can also be set in alias to simplify the Clojure command.
 
 ## Format code
 
+* `:lib/pprint-sorted` - pretty printing with sorted keys and set values
 * `:format/zprint filename` - format clojure code and Edn data structures in the given file using zprint
 * `:format/cljfmt [check|fix] filename` - format clojure code and Edn data structures in the given file(s) using cljfmt
 
@@ -418,51 +420,40 @@ any [Clojure aware editor]([Clojure aware editors](https://practical.li/clojure/
 
 Reveal can also used as a `tap>` source for more powerful manual debugging.
 
-* `:inspect/reveal` - visualisation with terminal REPL.
+* `:inspect/reveal` - simple terminal UI Clojure REPL with Reveal data visualisation UI.
 * `:inspect/reveal-light` - as above with light theme and 32 point Ubuntu Mono font
-* `:inspect/reveal-nrepl` - visualization for [Clojure aware editors](https://practical.li/clojure/clojure-editors/) via an nrepl server
+* `:inspect/reveal-nrepl` - as `:inspect/reveal` with nREPL server for [Clojure aware editors](https://practical.li/clojure/clojure-editors/)
 * `:inspec/reveal-light-nrepl` - as above with light theme and 32 point Ubuntu Mono font
-* `:inspect/reveal-nrepl-cider` - visualization tool for Emacs Cider / Spacemacs / VSCode Calva
-* `:inspec/reveal-light-nrepl-cider` - as above with light theme and 32 point Ubuntu Mono font
+* `:inspect/reveal-nrepl-cider` - as `:inspect-nrepl` with Clojure nREPL support for Emacs Cider
+* `:inspec/reveal-light-cider` - as above with light theme and 32 point Ubuntu Mono font
 
 | Command                                      | Description                                                                        |
 |----------------------------------------------|------------------------------------------------------------------------------------|
-| `clojure -M:inspect/reveal`                  | start a Reveal repl with data visualization window (cloure.main)                   |
-| `clojure -M:inspect/reveal-light`            | as above with light theme and large font                                           |
+| `clojure -X:inspect/reveal`                  | start a Reveal repl with data visualization window (cloure.main)                   |
+| `clojure -X:inspect/reveal-light`            | as above with light theme and large font                                           |
 | `clojure -X:inspect/reveal`                  | start a Reveal repl with data visualization window (clojure exec)                  |
 | `clojure -X:inspect/reveal-light`            | as above with light theme and large font                                           |
 | `clojure -M:inspect/reveal-nrepl`            | Start nrepl server to use Cider / Calva editors with reveal                        |
-| `clojure -X:inspect/reveal-light-nrepl`      | as above with light theme and large font                                           |
-| `clojure -M:inspect/reveal-rebel`            | Start a Rebel REPL with Reveal Visualisations                                      |
-| `clojure -M:inspect/reveal-light-rebel`      | Start a Rebel REPL with Reveal Visualisations & light theme                        |
-| `clojure -M:inspect/reveal:repl/rebel`       | Start a Rebel REPL with Reveal dependency. Add reveal as tap> source               |
-| `clojure -M:inspect/reveal-light:repl/rebel` | Start a Rebel REPL with Reveal dependency & light theme. Add reveal as tap> source |
+| `clojure -M:inspect/reveal-light-nrepl`      | as above with light theme and large font                                           |
+| `clojure -M:inspect/reveal-nrepl`            | Start nrepl server to use Cider / Calva editors with reveal                        |
+| `clojure -M:inspect/reveal-light-nrepl`      | as above with light theme and large font                                           |
 
-#### Connecting nREPL based editors
-
-Use the `:inspect/reveal-nrepl` alias when running the REPL, either in the terminal or via an nREPL based editor (CIDER, Calva, Conjure, Cursive, etc.)
-
-Alternatively, add an `.nrepl.edn` file to the root of a project to include the Reveal middleware
-
-```clojure
-{:middleware [vlaaad.reveal.nrepl/middleware]}
-```
 
 #### Cider jack-in and reveal
 
 See the [Reveal section of Practicalli Clojure](https://practical.li/clojure/clojure-cli/data-browsers/reveal.html#using-reveal-with-nrepl-editors) for full details, including how to set up a `.dir-locals.el` configuration.
 
-`:inspect/reveal-nrepl-cider` alias contains Reveal REPL with nrepl server and Emacs CIDER specific middleware
+`:inspect/reveal-cider` alias contains Reveal REPL with nrepl server and Emacs CIDER specific middleware
 
 `C-u cider-jack-in-clj` in CIDER to start a reveal REPL  (`SPC u , '` in Spacemacs)
 
 Edit the jack-in command by deleting the all the configuration after the `clojure` command and add the alias
 
 ```shell
-clojure -M:inspect/reveal-nrepl-cider
+clojure -M:inspect/reveal-cider
 ```
 
-`:inspect/reveal-nrepl-cider` is a light version of the above.
+`:inspect/reveal-cider` is a light version of the above.
 
 #### Running different types of repl
 
@@ -561,6 +552,16 @@ To start a REBL REPL from `cider-jack-in-clj` add a `.dir-locals.el` file to the
 
 * [REBL data visualization: run REBL with nREPL based editors](https://practical.li/clojure/alternative-tools/clojure-cli/cognitect-rebl.html#configure-rebl-with-clojure-editors)
 
+## Debug Tools
+
+Emacs CIDER has a built in debug tool that requires no dependencies (other than Cider itself).
+
+[Sayid](https://github.com/clojure-emacs/sayid) is a comprehensive debug and profile tool (which requires your code to compile) and generated a full and detailed history of an evaluation.
+
+* `lib/sayid` -  an omniscient debugger and profiler for Clojure
+
+The `:lib/sayid` alias can be used with `:repl/cider` when using `cider-connect-clj` or added to the `cider-jack-in-clj` command manually, or via a `.dir-locals.el` configuration using `cider-clojure-cli-aliases`. See the [Practicalli Spacemacs project configuration guide](https://practical.li/spacemacs/clojure-projects/project-configuration.html) for examples.
+
 
 ## Clojure Specification
 
@@ -622,30 +623,52 @@ Static analysis tools to help maintain code quality and suggest Clojure idioms.
 | `clojure -M:lint/eastwood` | classic lint tool for Clojure                    |
 | `clojure -M:lint/idiom`    | Suggest idiomatic Clojure code                   |
 
+
 ## Visualising project vars and library dependencies
 
 Create [Graphviz](https://www.graphviz.org/) graphs of project and library dependencies
 
-Morpheus creates grahps of project vars and their relationships
+> Install [Graphviz](https://www.graphviz.org/) to generate PNG and SVG images. Or use the [Edotor website](https://edotor.net/) to convert .dot files to PNG or SVG images and select different graph layout engines.
+
+### Var dependencies
+
+Generate dependency graphs for Vars in Clojure & ClojureScript namespaces
 
 * [`:graph/vars`](https://github.com/benedekfazekas/morpheus) - generate graph of vars in a project as a .dot file
 * [`:graph/vars-png`](https://github.com/benedekfazekas/morpheus) - generate graph of vars in a project as a .png file using `src` and `test` paths
 * [`:graph/vars-svg`](https://github.com/benedekfazekas/morpheus) - generate graph of vars in a project as a .svg file using `src` and `test` paths
 
-> Install [Graphviz](https://www.graphviz.org/) to generate PNG and SVG images. Or use the [Edotor website](https://edotor.net/) to convert .dot files to PNG or SVG images and select different graph layout engines.
+> Use `-f` command line argument to over-ride file type created, i.e `-f png`
 
-[Vizns](https://github.com/SevereOverfl0w/vizns) creates graphs of relationships between library dependencies and project namespaces
+### Namespace dependencies
 
-* `:graph/deps`
-* `:graph/deps-png` - generate a single deps-graph png image
+[Vizns](https://github.com/SevereOverfl0w/vizns) creates graphs of relationships between namespaces and their dependencies
 
-Other options:
+* `clojure -M:graph/ns-deps` - generate a single deps-graph SVG image
+* `clojure -M:graph/ns-deps-png` as above with PNG image
 
-* `clojure -M:graph/deps navigate`  # navigable folder of SVGs
-* `clojure -M:graph/deps single`    # deps-graph.dot file
-* `clojure -M:graph/deps single -o deps-graph.png -f png`
-* `clojure -M:graph/deps single -o deps-graph.svg -f svg`
-* `clojure -M:graph/deps single --show`  # View graph without saving
+Other [options described in the visns project readme](https://github.com/SevereOverfl0w/vizns#usage):
+
+
+### Project Dependency Relationships
+
+Visualise the relationships between dependencies in the project (or given `deps.edn` configuration).  Shows the fully qualified name of a dependency, its version and size.
+
+Generate a PNG image from the project `deps.edn` configuration and save to `project-dependencies-graph.png` file
+
+```bash
+clojure -T:graph/deps
+```
+
+Options available
+
+* `:deps` - Path to deps file (default = "deps.edn")
+* `:trace` - images showing individual trace images of dependency relations (default = false)
+* `:trace-file` - Path to trace.edn file to read
+* `:output` - file name string to save the generated image, `:output '"deps.png"'`
+* `:trace-omit` - Collection of lib symbols to omit in trace output
+* `:size` - Boolean flag to include sizes in images (default = false)
+
 
 ## Performance testing
 
