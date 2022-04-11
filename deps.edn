@@ -41,6 +41,47 @@
  :aliases
  {
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Development environment
+
+  ;; Include `dev` directory on the class path
+  ;; Supports the use of `dev/user.clj` to configure REPL startup
+  ;; http://practicalli.github.io/clojure/clojure-tools/configure-repl-startup.html
+
+  ;; clojure -M:env/dev
+  :env/dev
+  {:extra-paths ["dev"]}
+
+  :lib/nrepl
+  {:extra-deps {nrepl/nrepl {:mvn/version "0.9.0"}}}
+
+  ;; alpha state software as API has not been finalized however the code works reliably
+  ;; Latest commit on add-lib3 branch, don't update with :project/outdated
+  ;; Set logging implementation to no-operation
+  :lib/hotload
+  {:extra-deps {org.clojure/tools.deps.alpha {:git/url "https://github.com/clojure/tools.deps.alpha"
+                                              :git/sha     "e4fb92eef724fa39e29b39cc2b1a850567d490dd"}
+                org.slf4j/slf4j-nop {:mvn/version "1.7.36"}}}
+
+  ;; Refresh the current namespace in a running REPL
+  :lib/tools-ns
+  {:extra-deps {org.clojure/tools.namespace {:mvn/version "1.2.0"}}}
+
+  ;; Combination of hotload and tools-ns
+  :lib/reloaded
+  {:extra-deps {org.clojure/tools.namespace {:mvn/version "1.2.0"}
+                org.clojure/tools.deps.alpha {:git/url "https://github.com/clojure/tools.deps.alpha"
+                                              :git/sha "e4fb92eef724fa39e29b39cc2b1a850567d490dd"}
+                org.slf4j/slf4j-nop {:mvn/version "1.7.36"}}}
+
+  ;; Highlight important aspects of error stack trace using ANSI formatting
+  ;; https://github.com/AvisoNovate/pretty
+  :lib/pretty-errors
+  {:extra-deps {io.aviso/pretty {:mvn/version "1.1.1"}}}
+
+  ;; End of Development environment
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; REPL and nREPL connections
 
   ;; Built-in Clojure REPL
@@ -119,7 +160,8 @@
                 "-i"
                 "-f" "rebel-readline.main/-main"]}
 
-  ;; ClojureScript REPL with rebel readline with nrepl for editor connection
+
+;; ClojureScript REPL with rebel readline with nrepl for editor connection
   ;; https://github.com/bhauman/rebel-readline/tree/master/rebel-readline-cljs
   ;; CIDER: run `cider-connect-cljs` and select REPL host and port, figwheel-main and dev build
   :repl/rebel-cljs
@@ -140,7 +182,6 @@
                 "--middleware" "[cider.nrepl/cider-middleware,cider.piggieback/wrap-cljs-repl]"
                 "-f" "rebel-readline.cljs.main/-main"]}
 
-
   ;; rebel readline with reveal data visualization
   ;; NOTE: :repl/revel-reveal alias is very much a hack and not a good example to follow
   ;; clojure -M:repl/rebel-reveal
@@ -151,7 +192,6 @@
    :jvm-opts  ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"https://ff.static.1001fonts.net/u/b/ubuntu.mono.ttf\",:font-size,32}"]
    :main-opts ["-e" "(require,'rebel-readline.core),(require,'rebel-readline.clojure.line-reader),(require,'rebel-readline.clojure.service.local),(require,'rebel-readline.clojure.main),(require,'vlaaad.reveal)(rebel-readline.core/with-line-reader,(rebel-readline.clojure.line-reader/create,(rebel-readline.clojure.service.local/create)),(vlaaad.reveal/repl,:prompt,(fn,[]),:read,(rebel-readline.clojure.main/create-repl-read)))"]}
 
-
   ;; clojure -M:repl/reveal-light-rebel
   :repl/rebel-reveal-light
   {:extra-deps
@@ -160,38 +200,13 @@
    :jvm-opts  ["-Dvlaaad.reveal.prefs={:theme,:light,:font-family,\"JetBrains Mono\",:font-size,14}"]
    :main-opts ["-e" "(require,'rebel-readline.core),(require,'rebel-readline.clojure.line-reader),(require,'rebel-readline.clojure.service.local),(require,'rebel-readline.clojure.main),(require,'vlaaad.reveal)(rebel-readline.core/with-line-reader,(rebel-readline.clojure.line-reader/create,(rebel-readline.clojure.service.local/create)),(vlaaad.reveal/repl,:prompt,(fn,[]),:read,(rebel-readline.clojure.main/create-repl-read)))"]}
 
+  :lib/rebel
+  {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.4"}}}
 
-  ;;;; Development environment
+  ;; End of REPL and nREPL connections
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;; Include `dev` directory on the class path
-  ;; Supports the use of `dev/user.clj` to configure REPL startup
-  ;; http://practicalli.github.io/clojure/clojure-tools/configure-repl-startup.html
-
-  ;; clojure -M:env/dev
-  :env/dev
-  {:extra-paths ["dev"]}
-
-  :lib/nrepl
-  {:extra-deps {nrepl/nrepl {:mvn/version "0.9.0"}}}
-
-  ;; alpha state software as API has not been finalized however the code works reliably
-  ;; Latest commit on add-lib3 branch, don't update with :project/outdated
-  ;; Set logging implementation to no-operation
-  :lib/hotload
-  {:extra-deps {org.clojure/tools.deps.alpha {:git/url "https://github.com/clojure/tools.deps.alpha"
-                                              :git/sha     "d77476f3d5f624249462e275ae62d26da89f320b"}
-                org.slf4j/slf4j-nop {:mvn/version "1.7.36"}}}
-
-  ;; Refresh the current namespace in a running REPL
-  :lib/tools-ns
-  {:extra-deps {org.clojure/tools.namespace {:mvn/version "1.2.0"}}}
-
-  :lib/reloaded
-  {:extra-deps {org.clojure/tools.namespace {:mvn/version "1.2.0"}
-                org.clojure/tools.deps.alpha {:git/url "https://github.com/clojure/tools.deps.alpha"
-                                              :git/sha "d77476f3d5f624249462e275ae62d26da89f320b"}
-                org.slf4j/slf4j-nop {:mvn/version "1.7.36"}}}
-
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;;; Remote REPL connection
   ;; Connect to the nREPL server of a remote REPL
   ;; clojure -M:repl/remote --host hostname --port 12345
@@ -212,7 +227,7 @@
                 "-i"
                 "-f" "rebel-readline.main/-main"]}
 
-  ;; End of REPL and nREPL connections
+  ;; End of remote REPL connections
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -287,16 +302,24 @@
    :exec-fn      clj-new/generate
    :main-opts    ["-m" "clj-new.generate"]}
 
-  ;; End of: Creating projects from templates
+  ;; Convert Leiningen projects to Clojure CLI with depify
+  ;; Use `lein pprint` when `project.clj` includes quoted variables or paths to resolve
+  ;; `lein pprint | clojure -M:project/depify`
+  :project/depify
+  {:extra-deps {depify/depify {:git/url "https://github.com/hagmonk/depify"
+                               :git/sha     "b3f61517c860518c1990133aa6eb54caf1e4d591"}}
+   :main-opts  ["-m" "depify.project"]}
+
+;; End of: Creating projects from templates
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; Project compilation and dependencies
+  ;; Searching
 
-  ;; clj-check - report detailed compilation errors for a project
+  ;; clj-check - search each namespace and report compilation warnings and errors
   ;; https://github.com/athos/clj-check
-  ;; clojure -M:project/check
-  :project/check
+  ;; clojure -M:search/errors
+  :search/errors
   {:extra-deps {athos/clj-check
                 {:git/url "https://github.com/athos/clj-check.git"
                  :sha     "518d5a1cbfcd7c952f548e6dbfcb9a4a5faf9062"}}
@@ -304,10 +327,10 @@
 
   ;; find-deps - fuzzy search Maven & Clojars and add deps to deps.edn
   ;; https://github.com/hagmonk/find-deps
-  ;; clojure -M:project/find-deps http-kit  # fuzzy search for dependency
-  ;; clojure -M:project/find-deps http-kit ring compojure # multiple deps
-  ;; clojure -M:project/find-deps -F:merge http-kit # merge dep into deps.edn file
-  :project/find-deps
+  ;; clojure -M:search/libraries http-kit  # fuzzy search for dependency
+  ;; clojure -M:search/libraries http-kit ring compojure # multiple deps
+  ;; clojure -M:search/libraries --format:merge http-kit # merge dep into deps.edn file
+  :search/libraries
   {:extra-deps
    {find-deps/find-deps
     {:git/url "https://github.com/hagmonk/find-deps"
@@ -319,10 +342,10 @@
   ;; Manage versions for maven and git dependencies
 
   ;; - report project dependencies that have newer versions available:
-  ;; cd project-directory && clojure -T:project/outdated
+  ;; cd project-directory && clojure -T:search/outdated
   ;; - update library versions in this deps.edn file:
-  ;; cd ~/.clojure && clojure -T:project/outdated
-  :project/outdated
+  ;; cd $XDG_CONFIG_HOME/clojure && clojure -T:search/outdated
+  :search/outdated
   {:replace-paths ["."]
    :replace-deps  {com.github.liquidz/antq {:mvn/version "1.6.0"}
                    org.slf4j/slf4j-nop     {:mvn/version "1.7.36"}}
@@ -347,38 +370,21 @@
    :main-opts ["-m" "antq.core"]}
 
   ;; The classic project for checking maven based dependencies
-  ;; clojure -M:project/outdated-mvn
+  ;; clojure -M:search/outdated-mvn
   ;; DEPRECATE
-  :project/outdated-mvn
+  :search/outdated-mvn
   {:replace-paths []
    :replace-deps  {deps-ancient/deps-ancient {:mvn/version "0.0.5"}}
    :main-opts     ["-m" "deps-ancient.deps-ancient"]}
 
   ;; Carve - search through code for unused vars and remove them
-  ;; clojure -M:project/unused --opts '{:paths ["src" "test"]}'
-  :project/unused
+  ;; clojure -M:search/unused-vars --opts '{:paths ["src" "test"]}'
+  :search/unused-vars
   {:extra-deps {borkdude/carve
                 {:git/url "https://github.com/borkdude/carve"
                  :sha     "df552797a198b6701fb2d92390fce7c59205ea77"}}
    :main-opts  ["-m" "carve.main"]}
 
-  :project/unused-vars
-  {:extra-deps {borkdude/carve
-                {:git/url "https://github.com/borkdude/carve"
-                 :sha     "df552797a198b6701fb2d92390fce7c59205ea77"}}
-   :main-opts  ["-m" "carve.main"]}
-
-  :project/carve
-  {:extra-deps {borkdude/carve
-                {:git/url "https://github.com/borkdude/carve"
-                 :sha     "df552797a198b6701fb2d92390fce7c59205ea77"}}
-   :main-opts  ["-m" "carve.main"]}
-
-  ;; Convert Leiningen projects to Clojure CLI tools with depify
-  :project/depify
-  {:extra-deps {depify/depify {:git/url "https://github.com/hagmonk/depify"
-                               :sha     "b3f61517c860518c1990133aa6eb54caf1e4d591"}}
-   :main-opts  ["-m" "depify.project"]}
 
   ;; End of: Projects and dependencies
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1067,28 +1073,16 @@
   ;; - e.g., using the GitHub path (not the usual Maven group/artifact):
   ;; (load-master 'clojure/tools.trace)
 
-  :alpha/hotload-libs
+  :alpha/hotload-socket
   {:extra-deps {org.clojure/tools.deps.alpha
                 ;; Latest commit on add-lib3 branch, don't update with :project/outdated
                 {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha     "d77476f3d5f624249462e275ae62d26da89f320b"}
+                 :sha     "e4fb92eef724fa39e29b39cc2b1a850567d490dd"}
                 ;; Set logging implementation to no-operation
                 org.slf4j/slf4j-nop {:mvn/version "1.7.36"}}
    ;; DynamicClassLoader required when starting other processes via aliases, e.g. socket REPL or Cognitect's REBL
    :main-opts  ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"]}
 
-  :alpha/hot-load
-  {:extra-deps {org.clojure/tools.deps.alpha
-                ;; Latest commit on add-lib3 branch, don't update with :project/outdated
-                {:git/url "https://github.com/clojure/tools.deps.alpha"
-                 :sha     "d77476f3d5f624249462e275ae62d26da89f320b"}
-                ;; Set logging implementation to no-operation
-                org.slf4j/slf4j-nop {:mvn/version "1.7.36"}}
-   ;; DynamicClassLoader required when starting other processes via aliases, e.g. socket REPL or Cognitect's REBL
-   :main-opts  ["-e" "(->>(Thread/currentThread)(.getContextClassLoader)(clojure.lang.DynamicClassLoader.)(.setContextClassLoader,(Thread/currentThread)))"]}
-
-  ;;  End of EXPERIMENTAL
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Aliases to evaluate

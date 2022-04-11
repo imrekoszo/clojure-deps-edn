@@ -19,8 +19,10 @@ The **[Practicalli Clojure book](https://practical.li/clojure)** uses this confi
 * [Aliases](#aliases)
   * Running a REPL
     * [REPL Terminal UI](#repl-terminal-ui) I [REPL with Editor](#repl-with-editor) I [Hotload dependencies](#hotload-libraries-into-a-running-repl) I [Remote REPL Connection](#remote-repl-connection) I [Alternative REPL](#alternative-repl) I [Middleware](#middleware)
+  * [Development Environment](#development-environment)
   * [Clojure Projects](#clojure-projects)
     * [Dependencies](#project-dependencies) I [Analysis](#project-analysis) I [Packaging](#project-packaging) I [Deployment](#project-deployment)
+  * [Searching](#searching)
   * [Format](#format-code) I [Lint](#lint-tools)
   * [Java sources](#java-sources)
   * [Unit Testing](#unit-testing-frameworks)
@@ -30,8 +32,8 @@ The **[Practicalli Clojure book](https://practical.li/clojure)** uses this confi
     * [Visualise vars and deps](#visualising-project-vars-and-library-dependencies)
   * [Debug](#debug-tools)
   * [Services](#services)
-* [Library repositories](#library-repositories)
-* [Experimental](#experimental)
+* [Library Hosting Services](#library-hosting-services) - maven mirrors, local repositories
+
 
 
 ## Install Practicalli clojure-deps-edn
@@ -99,16 +101,16 @@ How to run common tasks for Clojure development.
 
 | Task                                                   | Command                                                         | Configuration      |
 |--------------------------------------------------------|-----------------------------------------------------------------|--------------------|
-| Create project (clojure exec)                          | `clojure -X:project/new :template app :name practicalli/my-app` | User alias         |
+| Create project (clojure exec)                          | `clojure -T:project/new :template app :name practicalli/my-app` | User alias         |
 | Run REPL (rebel readline with nrepl server)            | `clojure -M:repl/rebel`                                         | User alias         |
 | Run ClojureScipt REPL with nREPL (editor support)      | `clojure -M:repl/cljs-nrepl`                                    | User alias         |
 | Download dependencies                                  | `clojure -P`  (followed by optional aliases)                    | Built-in           |
-| Find libraries (mvn & git)                             | `clojure -M:project/find-deps library-name`                     | User alias         |
+| Find libraries (mvn & git)                             | `clojure -M:search/libraries library-name(s)`                   | User alias         |
 | Find available versions of a library                   | `clojure -X:deps find-versions`                                 | Built-in           |
 | Resolve git coord tags to shas and update deps.edn     | `clojure -X:deps git-resolve-tags git-coord-tag`                | Built-in           |
 | Generate image of project dependency graph             | `clojure -T:project/graph-deps`                                 | User alias         |
-| Check for new dependency versions                      | `clojure -T:project/outdated`                                   | User alias         |
-| Run tests                                              | `clojure -M:test/run`                                           | User/Project alias |
+| Check library dependencies for newer versions          | `clojure -T:search/outdated`                                    | User alias         |
+| Run tests / watch for changes                          | `clojure -M:test/run` / `clojure -M:test/watch`                 | User/Project alias |
 | Run the project  (clojure.main)                        | `clojure -M -m domain.main-namespace`                           | Built-in           |
 | [Run the project](https://youtu.be/u5VoFpsntXc?t=2166) | `clojure -X:project/run`                                        | Project alias      |
 | Package library                                        | `clojure -X:project/jar`                                        | User/Project alias |
@@ -140,8 +142,8 @@ Aliases provide additional configuration when running a REPL, an application or 
 | `-T`            | Run a tool or alias separate from a project classpath    | `:exec-fn`, `:exec-args` & :key val args             |
 | `-J`            | Java Virtual Machine specific options (memory size, etc) |                                                      |
 
-* deps = `:deps`, `:extra-deps`, `replace-deps`
-* path = `:path`, `:extra-paths`, `replace-paths`
+* deps = `:deps`, `:extra-deps` or `replace-deps`
+* path = `:path`, `:extra-paths` or `replace-paths`
 
 
 ## REPL terminal UI
@@ -223,6 +225,18 @@ PREPL is a REPL with structured output.  See [Cloure socket prepl cookbook](http
 | `clojure -M:repl/prepl-cljs`     | Clojure REPL using PREPL Server on port 44444                                   |
 
 
+## Development Environment
+
+Environment settings and libraries to support REPL driven development
+
+* `:env/dev` - add `dev` directory to class path - e.g. include `dev/user.clj` to [configure REPL starup](https://practical.li/clojure/clojure-cli/projects/configure-repl-startup.html)
+* `:lib/nrepl` include nrepl as a library
+* `:lib/hotload` - include `org.clojure/tools.deps.alpha` add-libs commit to [hotload libraries into a running REPL](https://practical.li/clojure/alternative-tools/clojure-cli/hotload-libraries.html)
+* `:lib/tools-ns` - include `org.clojure/tools.namespace` to refresh the current namespace in a running REPL
+* `:lib/reloaded` - combination of hotload and tools-ns aliases
+* `:lib/pretty-errors` - highlight important aspects of error stack trace using ANSI formatting
+
+
 ## Clojure Projects
 
 * Create projects from deps, leiningen and boot templates with [clj-new](https://github.com/seancorfield/clj-new)
@@ -276,15 +290,15 @@ Then the project can be run using `clojure -X:project/run` and arguments can opt
 
 * [`:project/check`](https://github.com/athos/clj-check.git) - detailed report of compilation errors for a project
 * [`:project/graph-deps`](https://github.com/clojure/tools.deps.graph) - graph of project dependencies (png image)
-* [`:project/find-deps`](https://github.com/hagmonk/find-deps) - fuzzy search for libraries to add as dependencies
+* [`:search/libraries`](https://github.com/hagmonk/find-deps) - fuzzy search for libraries to add as dependencies
 * [`:project/outdated`](https://github.com/liquidz/antq) - report newer versions for maven and git dependencies
 * [`:project/outdated-mvn`](https://github.com/slipset/deps-ancient) - check for newer dependencies (maven only)
 
 | Command                                              | Description                                                             |
 |------------------------------------------------------|-------------------------------------------------------------------------|
 | `clojure -M:project/check`                           | detailed report of compilation errors for a project                     |
-| `clojure -M:project/find-deps library-name`          | fuzzy search Maven & Clojars                                            |
-| `clojure -M:project/find-deps -F:merge library-name` | fuzzy search Maven & Clojars and save to project deps.edn               |
+| `clojure -M:search/libraries library-name`          | fuzzy search Maven & Clojars                                            |
+| `clojure -M:search/libraries -F:merge library-name` | fuzzy search Maven & Clojars and save to project deps.edn               |
 | `clojure -T:project/outdated`                        | report newer versions for maven and git dependencies                    |
 | `clojure -M:project/outdated-mvn`                    | check for newer dependencies (maven only)                               |
 
@@ -348,6 +362,30 @@ Set fully qualified artifact-name and version in project `pom.xml` file
 Path to project.jar can also be set in alias to simplify the Clojure command.
 
 > `clojure -X:deps mvn-install project.jar` for local deployment of jars is part of the 1.10.1.697 release of the [Clojure CLI](https://clojure.org/guides/getting_started) in September 2020.
+
+
+## Searching
+
+Tools to search through code and libraries
+
+* `-M:search/errors` [clj-check](https://github.com/athos/clj-check.git) - search each namespace and report compilation warnings and errors
+* `-M::search/unused-vars` [Carve](https://github.com/borkdude/carve) - search code for unused vars and remove them - optionally specifying paths `--opts '{:paths ["src" "test"]}'`
+* `-M:search/libraries` - [find-deps](https://github.com/hagmonk/find-deps) - fuzzy search Maven & Clojars and add deps to deps.edn
+* `-T:search/outdated` -  [liquidz/antq](https://github.com/liquidz/antq) - check for newer versions of libraries, updating `deps.edn` if `:update true` passed as argument
+
+
+### Searching library options
+
+A fuzzy search for a library by name, passing multiple names to search for
+
+```bash
+clojure -M:search/libraries http-kit ring compojure
+```
+
+Add the matching library as a dependency into the project `deps.edn` file
+
+clojure -M:search/libraries --format:merge http-kit
+
 
 ## Format code
 
@@ -761,23 +799,8 @@ clojure -M:community/zulip-event create --zulip-auth "${ZULIP_AUTH}" --title 'Pr
 
 Take care to get the timezone notation correct.
 
----
 
-## Experimental / Alpha Aliases
-
-* [`:alpha/carve`](https://github.com/borkdude/carve) - EXPERIMENTAL, use with caution - carve out unwanted vars in code
-* [`:alpha/hotload-libs`](https://github.com/clojure/tools.deps.alpha) - EXPERIMENTAL, use with caution - hot-load libraries into a running namespace.
-
-**Hot loading dependencies** (unofficial)
-> This is an unofficial approach using to hot loading and the API may change in future
-
-* [`:alpha/hotload-libs`](https://github.com/clojure/tools.deps.alpha) - Add jar dependencies into a running REPL.
-
-Practically Clojure [details how to hot-load libraries into a running REP using tools.deps.alpha](https://practical.li/clojure/alternative-tools/clojure-cli/hotload-libraries.html).
-
-[The Clojure Webapp hotload libraries repository](https://github.com/practicalli/clojure-webapp-hotload-libraries) contains and example project that uses `add-libs` to hotload library dependencies.
-
-# Library repositories
+# Library Hosting Services
 
 Repositories that host libraries for Clojure.
 
