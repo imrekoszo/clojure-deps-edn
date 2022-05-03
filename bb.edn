@@ -34,12 +34,8 @@
                 (sort))
 
          alias-recipes
-         {:cursive/lite lite
-          :cursive/full full
-
-          ;; backwards-compatibility
-          :cursive-lite lite
-          :cursive-full full}
+         {:cursive/user-lite lite
+          :cursive/user-full full}
 
          recipe->alias
          (fn [recipe]
@@ -49,6 +45,9 @@
              (->> (reduce (fn [acc m] (merge-with merge acc m))))
              (select-keys [:extra-deps])))]
      (-> all-deps
+       (select-keys [:aliases])
+       (update :aliases select-keys [:inspect.reveal/prepl])
        (update :aliases
          into (map (juxt key (comp recipe->alias val))) alias-recipes)
-       (prn)))}}}
+       (prn)
+       (->> (binding [*print-namespace-maps* false]))))}}}

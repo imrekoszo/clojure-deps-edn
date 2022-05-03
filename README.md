@@ -1,3 +1,11 @@
+## Imre's additions
+
+1. clone into a _subfolder_ of `~/.clojure`
+2. `cd` into cloned folder
+3. `bb makedeps | jet --pretty > ../deps.edn` to generate the user `deps.edn`
+
+## Rest of original readme
+
 ![Practicalli Clojure deps.edn user wide configuration for Clojure projects](https://raw.githubusercontent.com/practicalli/graphic-design/live/practicalli-clojure-deps.png)
 
 [![License CC By SA 4.0](https://img.shields.io/badge/license-CC%20BY--SA%204.0%20-blueviolet)](http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1)
