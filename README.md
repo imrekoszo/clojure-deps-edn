@@ -1,7 +1,14 @@
 ![Practicalli Clojure deps.edn user wide configuration for Clojure projects](https://raw.githubusercontent.com/practicalli/graphic-design/live/practicalli-clojure-deps.png)
 
+[![License CC By SA 4.0](https://img.shields.io/badge/license-CC%20BY--SA%204.0%20-blueviolet)](http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1)
+[![GitHub Sponsors for practicalli-john](https://img.shields.io/github/sponsors/practicalli-john)](https://github.com/sponsors/practicalli-john)
 ![clj-kondo GitHub action](https://github.com/practicalli/clojure-deps-edn/actions/workflows/lint-with-clj-kondo.yml/badge.svg)
 [![MegaLinter](https://github.com/practicalli/clojure-deps-edn/actions/workflows/megalinter.yaml/badge.svg)](https://github.com/practicalli/clojure-deps-edn/actions/workflows/megalinter.yaml)
+
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+<a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a>
+ <a property="dct:title" rel="cc:attributionURL" href="https://github.com/practicalli/clojure-deps-edn">Practicalli Clojure deps.edn</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://practical.li">Practicalli</a> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0 </a></p>
 
 ## User level configuration for Clojure CLI
 
@@ -114,7 +121,7 @@ How to run common tasks for Clojure development.
 | Run the project  (clojure.main)                        | `clojure -M -m domain.main-namespace`                           | Built-in           |
 | [Run the project](https://youtu.be/u5VoFpsntXc?t=2166) | `clojure -X:project/run`                                        | Project alias      |
 | Package library                                        | `clojure -X:project/jar`                                        | User/Project alias |
-| Deploy library locally (~/.m2/repository)              | `clojure -X:deps mvn-install`                                   | Built-in           |
+| Deploy library locally (~/.m2/repository)              | `clojure -X:deps mvn-install :jar '"project.jar"'`              | Built-in           |
 | Package application                                    | `clojure -X:project/uberjar`                                    | User/Project alias |
 
 > Add alias `:project/run` to the deps.edn file in the root of a project:
@@ -345,15 +352,15 @@ clojure -X:project/jar :jar '"practicalli.app.jar"' :aot false :main-class domai
 
 Deploy a project archive file locally or to Clojars.org
 
-* [`-X:deps mvn-install`](https://insideclojure.org/2020/09/04/clj-exec/) built-in Clojure CLI alias to deploy a Jar locally in the `~/.m2/repository` directory
+* [`-X:deps mvn-install`](https://clojure.org/reference/deps_and_cli#_local_maven_install) built-in Clojure CLI alias to deploy a Jar locally in the `~/.m2/repository` directory
 * [:deploy/clojars](https://github.com/slipset/deps-deploy) - deploy jar to [clojars.org](https://clojars.org/)
 * [:deploy/clojars-signed](https://github.com/slipset/deps-deploy) - sign and deploy jar to [clojars.org](https://clojars.org/)
 
-| Command                                         | Description                                                              |
-|-------------------------------------------------|--------------------------------------------------------------------------|
-| `clojure -X:deps mvn-install project.jar`       | [NEW] deploy jar file to local maven repository, i.e. `~/.m2/repository` |
-| `clojure -M:project/clojars project.jar`        | deploy jar file to Clojars                                               |
-| `clojure -M:project/clojars-signed project.jar` | deploy signed jar file to Clojars                                        |
+| Command                                            | Description                                                              |
+|----------------------------------------------------|--------------------------------------------------------------------------|
+| `clojure -X:deps mvn-install :jar '"project.jar"'` | deploy jar file to local maven repository, i.e. `~/.m2/repository` |
+| `clojure -M:project/clojars project.jar`           | deploy jar file to Clojars                                               |
+| `clojure -M:project/clojars-signed project.jar`    | deploy signed jar file to Clojars                                        |
 
 Set Clojars username/token in `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment variables.
 
@@ -361,7 +368,7 @@ Set fully qualified artifact-name and version in project `pom.xml` file
 
 Path to project.jar can also be set in alias to simplify the Clojure command.
 
-> `clojure -X:deps mvn-install project.jar` for local deployment of jars is part of the 1.10.1.697 release of the [Clojure CLI](https://clojure.org/guides/getting_started) in September 2020.
+> `clojure -X:deps mvn-install :jar '"project.jar"'` for [local deployment of jars](https://clojure.org/reference/deps_and_cli#_local_maven_install) is part of the 1.10.1.697 release of the [Clojure CLI](https://clojure.org/guides/getting_started) in September 2020.
 
 
 ## Searching
@@ -716,16 +723,12 @@ Performance testing tools for the REPL
 
 Use the aliases with either `-M` or `-X` flags on the Clojure command line.
 
-> TODO: check these alias combinations are correct
-
 ```clojure
 clojure -M:performance/benchmark:repl/rebel
 
 (require '[criterium.core :refer [bench quick-bench]])
-(bench (adhoc-expression))
+(bench (expression-to-test))
 ```
-
-> TODO: check these alias combinations are correct
 
 Performance test a project in the REPL
 
