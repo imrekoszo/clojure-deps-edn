@@ -24,12 +24,19 @@
 
          all-deps (merge-with merge deps secret)
 
-         lite (-> #{:performance/benchmark :imre/hashp
-                    :imre/trace :inspect/reveal :imre/aviso-pretty :inspect/portal-cli}
+         lite (-> #{:imre/aviso-pretty
+                    :imre/hashp
+                    :imre/profile
+                    :inspect/reveal
+                    :performance/benchmark}
                 (sort))
 
-         full (-> #{:imre/measure :imre/speculative
-                    :alpha/reflect :imre/decompile}
+         full (-> #{:alpha/reflect
+                    :imre/decompile
+                    :imre/measure
+                    :imre/speculative
+                    :imre/trace
+                    :inspect/portal-cli}
                 (into lite)
                 (sort))
 
@@ -46,7 +53,7 @@
              (select-keys [:extra-deps])))]
      (-> all-deps
        (select-keys [:aliases])
-       (update :aliases select-keys [:inspect.reveal/prepl])
+       (update :aliases select-keys (into [:inspect.reveal/prepl] full))
        (update :aliases
          into (map (juxt key (comp recipe->alias val))) alias-recipes)
        (prn)
