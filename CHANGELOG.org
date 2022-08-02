@@ -2,6 +2,72 @@
 
 * Unreleased
 
+* 2022-07-09
+** Added
+*** [[https://github.com/practicalli/clojure-deps-edn/issues/44][#44 Windows and Clojure CLI escape character issues]] - add link to escape quoting section of Clojure CLI documentation
+** Changed
+*** .github/workflows/lint-with-clj-kondo.yml updated to 2022.05.31
+*** Update library versions using `clojure -T:search/outdated`
+
+  | :name                           |   :current |    :latest |
+  |---------------------------------+------------+------------|
+  | cider/cider-nrepl               |     0.28.4 |     0.28.5 |
+  | clj-kondo/clj-kondo             | 2022.05.31 | 2022.06.22 |
+  | cljfmt/cljfmt                   |      0.8.0 |      0.8.2 |
+  | com.github.liquidz/antq         |    1.7.798 |    1.9.859 |
+  | com.github.seancorfield/clj-new |    1.2.381 |    1.2.399 |
+  | com.h2database/h2               |    2.1.212 |    2.1.214 |
+  | djblue/portal                   |     0.26.0 |     0.28.0 |
+  | jonase/eastwood                 |      1.2.3 |      1.2.4 |
+  | lambdaisland/kaocha             |  1.66.1034 |  1.68.1059 |
+  | nvd-clojure/nvd-clojure         |      2.6.0 |      2.7.0 |
+  | refactor-nrepl/refactor-nrepl   |      3.5.2 |      3.5.3 |
+
+* 2022-06-24
+** Changed
+*** Update `:repl/interactive` and `:repl/headless` aliases with `cider/cider-nrepl` middleware
+
+* 2022-06-18
+** Changed
+*** Update `:repl/*` aliases to use the `--interactive` option rather than the short `-i` version
+*** Update readme to use `:search/outdated` and `:search/outdated-mvn` aliases
+
+* 2022-06-11
+** Resolved
+*** #48 - provide `:mvn/local-repo` as an example only - ideally requires full path
+
+* 2022-06-06
+** Added
+*** aliases section keys documentation
+
+** Changed
+*** Set :mvn/local-repo to XDG_CACHE_HOME location, `~/.cache/maven/repository` as described in the [[https://practical.li/blog/posts/adopt-FreeDesktop.org-XDG-standard-for-configuration-files/][Practicalli blog article on XDG standard for development tools]]
+*** Update .github/workflows/lint-with-clj-kondo.yml it version 2022.05.31
+*** Update library versions using `clojure -T:search/outdated > outdated-2022-06-06.org` command
+
+| :name                                |   :current |              :latest |
+|--------------------------------------+------------+----------------------|
+| cider/cider-nrepl                    |     0.28.3 |               0.28.4 |
+| clj-kondo/clj-kondo                  | 2022.04.08 |           2022.05.31 |
+| cloverage/cloverage                  |      1.2.3 |                1.2.4 |
+| com.bhauman/figwheel-main            |     0.2.16 |               0.2.18 |
+| com.github.liquidz/antq              |      1.6.1 |              1.7.798 |
+| com.h2database/h2                    |    2.1.210 |              2.1.212 |
+| djblue/portal                        |     0.23.0 |               0.26.0 |
+| io.github.cognitect-labs/test-runner |     v0.5.0 | v0.5.1 (SHA dfb30dd) |
+| lambdaisland/kaocha                  |  1.65.1029 |            1.66.1034 |
+| nvd-clojure/nvd-clojure              |      2.5.0 |                2.6.0 |
+| org.clojure/tools.namespace          |      1.2.0 |                1.3.0 |
+| zprint/zprint                        |      1.2.2 |                1.2.3 |
+
+> Aliases that use a :git/tag version, e.g. `:test/cognitect` should also check for the latest `:git/sha` value on or after that tag to ensure the correct commit is used.  TODO: check if the latest antq checks for a new `:git/sha` value if there is a newer `:git/tag` value.
+
+
+* 2022-05-04
+** Changed
+*** `:repl/socket` using clojure.exec alias rather than JVM opts (moved to :repl/socket-jvm-opts alias
+*** `deps find-versions` clarified `:lib` and domain/library-name options required
+
 * 2022-04-21
 ** Fixed
 *** `-X:deps mvn-install` documentation - wrap `:jar` value in single and double quotes. Resolves #44
@@ -11,7 +77,7 @@
 ** Changed
 *** Removed :deps from configuration to avoid over-riding version from install of Clojure CLI
 *** GitHub action .github/workflows/lint-with-clj-kondo.yml updated to version 2022.04.08
-*** Update library versions using `clojure -T:search/outated > outdated-2022-04-12.org` command
+*** Update library versions using `clojure -T:search/outdated > outdated-2022-04-12.org` command
 
   | :name                             |                                 :current |                                  :latest |
   |-----------------------------------+------------------------------------------+------------------------------------------|
