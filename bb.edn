@@ -24,16 +24,16 @@
 
          all-deps (merge-with merge deps secret)
 
-         lite (-> #{:imre/aviso-pretty
+         lite (-> #{:lib/pretty-errors
                     :imre/hashp
                     :imre/profile
-                    :inspect/reveal
+                    :lib/reveal
                     :performance/benchmark}
                 (sort))
 
          full (-> #{:alpha/reflect
                     :imre/decompile
-                    :imre/measure
+                    :performance/memory-meter
                     :imre/speculative
                     :imre/trace
                     :inspect/portal-cli}
@@ -49,11 +49,18 @@
            (-> all-deps
              (:aliases)
              ((apply juxt recipe))
-             (->> (reduce (fn [acc m] (merge-with merge acc m))))
-             (select-keys [:extra-deps])))]
+             (->> (reduce (fn [acc m]
+                            (merge-with
+                              (fn [a b]
+                                (cond
+                                  (map? a) (merge a b)
+                                  (sequential? a) (into a b)
+                                  :else b))
+                              acc m))))
+             (select-keys [:extra-deps :jvm-opts])))]
      (-> all-deps
        (select-keys [:aliases])
-       (update :aliases select-keys (into [:inspect.reveal/prepl :test/run] full))
+       (update :aliases select-keys (into [:inspect.reveal/prepl :test/cognitect :test/run] full))
        (update :aliases
          into (map (juxt key (comp recipe->alias val))) alias-recipes)
        (prn)
