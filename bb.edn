@@ -53,7 +53,7 @@
              (select-keys [:extra-deps])))]
      (-> all-deps
        (select-keys [:aliases])
-       (update :aliases select-keys (into [:inspect.reveal/prepl] full))
+       (update :aliases select-keys (into [:inspect.reveal/prepl :test/run] full))
        (update :aliases
          into (map (juxt key (comp recipe->alias val))) alias-recipes)
        (prn)
