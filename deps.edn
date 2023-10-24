@@ -567,7 +567,7 @@
 
   ;; Morse - https://github.com/nubank/morse
   :inspect/morse
-  {:extra-deps {io.github.nubank/morse {:git/tag "v2023.04.30.01" :git/sha "d99b09c"}}
+  {:extra-deps {io.github.nubank/morse {:git/tag "v2023.10.06.02" :git/sha "88b5ff7"}}
 
   ;; Cursive JVM args:
   ;; -Dvlaaad.reveal.prefs={:theme,:light,:font-family,"JetBrains Mono",:font-size,15}
@@ -727,7 +727,7 @@
    ;; clj-kondo - comprehensive and fast linter
    ;; https://github.com/borkdude/clj-kondo/
    :lint/clj-kondo
-   {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2023.09.07"}}
+   {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2023.10.20"}}
     :main-opts  ["--main" "clj-kondo.main" "--lint" "src"]}
 
    ;; DEPRECATED - not used
@@ -947,7 +947,7 @@
   {:extra-deps {speculative/speculative {:mvn/version "0.0.3"}}}
 
   :imre/profile
-  {:extra-deps {com.clojure-goes-fast/clj-async-profiler {:mvn/version "1.1.0"}}
+  {:extra-deps {com.clojure-goes-fast/clj-async-profiler {:mvn/version "1.1.1"}}
    :jvm-opts   ["-Djdk.attach.allowAttachSelf" "-XX:+UnlockDiagnosticVMOptions" "-XX:+DebugNonSafepoints"]}
 
   :imre/tools.namespace
