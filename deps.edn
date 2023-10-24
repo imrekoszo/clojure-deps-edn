@@ -388,6 +388,21 @@
                :upgrade false
                :force   false}}
 
+  :imre/outdated
+  {:replace-paths ["."]
+   :replace-deps  {com.github.liquidz/antq {:mvn/version "2.7.1133"}
+                   org.slf4j/slf4j-nop     {:mvn/version "2.0.9"}}
+   :exec-fn antq.tool/outdated
+   :exec-args {:directory ["."] ; default
+               #_#_:exclude ["org.clojure/tools.deps.alpha"
+                         "org.clojure/clojurescript"]
+               #_#_ :focus ["com.github.liquidz/antq"]
+               #_#_:skip ["boot" "leiningen"]
+               :reporter "table" ; json edn format
+               :verbose false
+               :upgrade false
+               :force   false}}
+
   ;; Carve - search through code for unused vars and remove them
   ;; clojure -M:search/unused-vars --opts '{:paths ["src" "test"]}'
   :search/unused-vars

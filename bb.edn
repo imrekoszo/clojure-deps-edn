@@ -57,10 +57,16 @@
                                   (sequential? a) (into a b)
                                   :else b))
                               acc m))))
-             (select-keys [:extra-deps :jvm-opts])))]
+             (select-keys [:extra-deps :jvm-opts])))
+
+         copy-over
+         [:imre/outdated
+          :inspect.reveal/prepl
+          :test/cognitect
+          :test/run]]
      (-> all-deps
        (select-keys [:aliases])
-       (update :aliases select-keys (into [:inspect.reveal/prepl :test/cognitect :test/run] full))
+       (update :aliases select-keys (into copy-over full))
        (update :aliases
          into (map (juxt key (comp recipe->alias val))) alias-recipes)
        (prn)
