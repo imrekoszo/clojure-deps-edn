@@ -567,7 +567,7 @@
 
   ;; Morse - https://github.com/nubank/morse
   :inspect/morse
-  {:extra-deps {io.github.nubank/morse {:git/tag "v2023.10.06.02" :git/sha "88b5ff7"}}
+  {:extra-deps {io.github.nubank/morse {:git/tag "v2023.10.06.02" :git/sha "88b5ff7"}}}
 
   ;; Cursive JVM args:
   ;; -Dvlaaad.reveal.prefs={:theme,:light,:font-family,"JetBrains Mono",:font-size,15}
@@ -954,4 +954,4 @@
   {:extra-deps {org.clojure/tools.namespace {:mvn/version "1.4.4"}}}
    ;; --------------------------------------------------
 
-   #_()}}}
+   #_()}}
