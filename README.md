@@ -163,7 +163,7 @@ How to run common tasks for Clojure development.
 | Run REPL (rebel readline with nrepl server)        | `clojure -M:repl/rebel`                                                                 | Practicalli   |
 | Run ClojureScript REPL with nREPL (editor support) | `clojure -M:repl/cljs`                                                                  | Practicalli   |
 | Download dependencies                              | `clojure -P`  (followed by optional aliases)                                            | Built-in      |
-| Find libraries (Clojars & Maven Central)           | `clojure -M:search/libraries qualified-lib rary-name(s)`                                | Practicalli   |
+| Find libraries (Clojars & Maven Central)           | `clojure -M:search/libraries qualified-library-name(s)`                                 | Practicalli   |
 | Find available versions of a library               | `clojure -X:deps find-versions :lib domain/library-name`                                | Built-in      |
 | Resolve git coord tags to shas and update deps.edn | `clojure -X:deps git-resolve-tags git-coord-tag`                                        | Built-in      |
 | Generate image of project dependency graph         | `clojure -T:project/graph-deps`                                                         | Practicalli   |
@@ -301,7 +301,7 @@ Then the project can be run using `clojure -X:project/run` and arguments can opt
 |-----------------------------------------------------|-----------------------------------------------------------|
 | `clojure -M:project/check`                          | detailed report of compilation errors for a project       |
 | `clojure -M:search/libraries library-name`          | fuzzy search Maven & Clojars                              |
-| `clojure -M:search/libraries -F:merge library-name` | fuzzy search Maven & Clojars and save to project deps.edn |
+| `clojure -M:search/libraries -F:save library-name` | fuzzy search Maven & Clojars and save to project deps.edn |
 | `clojure -T:search/outdated`                        | report newer versions for maven and git dependencies      |
 | `clojure -M:search/outdated-mvn`                    | check for newer dependencies (maven only)                 |
 
