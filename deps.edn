@@ -304,7 +304,7 @@
   ;; cd $XDG_CONFIG_HOME/clojure && clojure -T:search/outdated
   :search/outdated
   {:replace-paths ["."]
-   :replace-deps  {com.github.liquidz/antq {:mvn/version "2.7.1133"}
+   :replace-deps  {com.github.liquidz/antq {:mvn/version "2.7.1147"}
                    org.slf4j/slf4j-nop     {:mvn/version "2.0.9"}}
    :exec-fn antq.tool/outdated
    :exec-args {:directory ["."] ; default
@@ -319,7 +319,7 @@
 
   :imre/outdated
   {:replace-paths ["."]
-   :replace-deps  {com.github.liquidz/antq {:mvn/version "2.7.1133"}
+   :replace-deps  {com.github.liquidz/antq {:mvn/version "2.7.1147"}
                    org.slf4j/slf4j-nop     {:mvn/version "2.0.9"}}
    :exec-fn antq.tool/outdated
    :exec-args {:directory ["."] ; default
