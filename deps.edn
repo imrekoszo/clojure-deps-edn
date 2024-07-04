@@ -311,7 +311,7 @@
 
   :imre/outdated
   {:replace-paths ["."]
-   :replace-deps  {com.github.liquidz/antq {:mvn/version "2.7.1147"}
+   :replace-deps  {com.github.liquidz/antq {:mvn/version "2.8.1201"}
                    org.slf4j/slf4j-nop     {:mvn/version "2.0.9"}}
    :exec-fn antq.tool/outdated
    :exec-args {:directory ["."] ; default
