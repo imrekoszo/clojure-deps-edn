@@ -61,6 +61,7 @@
 
          copy-over
          [:imre/outdated
+          :imre/lombok
           :inspect.reveal/prepl
           :test/cognitect
           :test/run]]

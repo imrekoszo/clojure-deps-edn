@@ -799,6 +799,9 @@
   :imre/tools.namespace
   {:extra-deps {org.clojure/tools.namespace {:mvn/version "1.4.4"}}}
 
+  :imre/lombok
+  {:extra-deps {org.projectlombok/lombok {:mvn/version "1.18.32"}}}
+
   ;; Cursive JVM args:
   ;; -Dvlaaad.reveal.prefs={:theme,:light,:font-family,"JetBrains Mono",:font-size,15}
 
