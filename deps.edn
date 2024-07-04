@@ -803,12 +803,12 @@
   ;; -Dvlaaad.reveal.prefs={:theme,:light,:font-family,"JetBrains Mono",:font-size,15}
 
   :lib/reveal
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.280"}}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.282"}}
    :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme :light :font-family \"JetBrains Mono\" :font-size 15}"]}
 
   :inspect.reveal/prepl
   {:replace-paths []
-   :replace-deps  {vlaaad/reveal                     {:mvn/version "1.3.280"}
+   :replace-deps  {vlaaad/reveal                     {:mvn/version "1.3.282"}
                    #_#_com.phronemophobic/reveal-treemap {:mvn/version "0.1.6"}}
    :jvm-opts      ["-Dvlaaad.reveal.prefs={:theme :light :font-family \"JetBrains Mono\" :font-size 15}"]
    :main-opts     ["-m" "vlaaad.reveal" "remote-prepl" ":out-fn" "clojure.core/identity" ":port"]}
