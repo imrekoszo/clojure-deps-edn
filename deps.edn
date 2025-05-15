@@ -63,7 +63,7 @@
   ;; Use with editor command to start a REPL (Jack-in) to include REPL Reloaded tools
   :dev/reloaded
   {:extra-paths ["dev" "test"]
-   :extra-deps  {djblue/portal                {:mvn/version "0.55.1"}   ; portal data inspector
+   :extra-deps  {djblue/portal                {:mvn/version "0.59.1"}   ; portal data inspector
                  clj-commons/clj-yaml         {:mvn/version "1.0.27"}   ; portal yaml support (optional)
                  org.clojure/tools.namespace  {:mvn/version "1.5.0"}
                  org.clojure/tools.trace      {:mvn/version "0.8.0"}
@@ -76,7 +76,7 @@
   ;; ClojureScript tools during REPl startup
   :dev/reloaded-cljs
   {:extra-paths ["dev" "test"]
-   :extra-deps  {djblue/portal             {:mvn/version "0.55.1"}   ; portal data inspector
+   :extra-deps  {djblue/portal             {:mvn/version "0.59.1"}   ; portal data inspector
                  org.clojure/clojurescript {:mvn/version "1.10.844"}
                  lambdaisland/kaocha-cljs  {:mvn/version "1.5.154"}
                  org.clojure/test.check    {:mvn/version "1.1.1"}}}
@@ -108,26 +108,29 @@
   ;; Running a REPL
 
   ;; Basic REPL UI with nREPL server for Clojure Editor support
+  #_#_
   :repl/basic
-  {:extra-deps {nrepl/nrepl       {:mvn/version "1.1.1"}
+  {:extra-deps {nrepl/nrepl       {:mvn/version "1.3.1"}
                 cider/cider-nrepl {:mvn/version "0.47.1"}}
    :main-opts  ["--main" "nrepl.cmdline"
                 "--middleware" "[cider.nrepl/cider-middleware]"
                 "--interactive"]}
 
   ;; Headless REPL with nREPL server for Clojure Editor support
+  #_#_
   :repl/headless
-  {:extra-deps {nrepl/nrepl       {:mvn/version "1.1.1"}
+  {:extra-deps {nrepl/nrepl       {:mvn/version "1.3.1"}
                 cider/cider-nrepl {:mvn/version "0.47.1"}}
    :main-opts  ["--main" "nrepl.cmdline"
                 "--middleware" "[cider.nrepl/cider-middleware]"]}
 
   ;; Basic REPL UI, nREPL server and Portal data inspector
+  #_#_
   :repl/inspect
   {:extra-deps
-   {nrepl/nrepl       {:mvn/version "1.1.1"}
+   {nrepl/nrepl       {:mvn/version "1.3.1"}
     cider/cider-nrepl {:mvn/version "0.47.1"}
-    djblue/portal     {:mvn/version "0.55.1"}}
+    djblue/portal     {:mvn/version "0.59.1"}}
    :main-opts ["--main" "nrepl.cmdline"
                "--middleware"
                "[cider.nrepl/cider-middleware,portal.nrepl/wrap-portal]"]}
@@ -136,9 +139,10 @@
   ;; Recommend using custom `user` namespace to start Clerk as tap> source
   ;; Alpha stage alias design - may change
   ;; clojure -M:repl/clerk
+  #_#_
   :repl/clerk
   {:extra-deps {io.github.nextjournal/clerk   {:mvn/version "0.15.957"}
-                nrepl/nrepl                   {:mvn/version "1.1.1"}
+                nrepl/nrepl                   {:mvn/version "1.3.1"}
                 cider/cider-nrepl             {:mvn/version "0.47.1"}
                 refactor-nrepl/refactor-nrepl {:mvn/version "3.10.0"}}
    :main-opts  ["--eval" "(require '[nextjournal.clerk])(nextjournal.clerk/show! 'nextjournal.clerk.tap)(nextjournal.clerk/serve! {:browse? true})"
@@ -156,8 +160,9 @@
   ;; Calva: connect to REPL command and select build tool, REPL host and port
 
   ;; clojure -M:repl/rebel
+  #_#_
   :repl/rebel
-  {:extra-deps {nrepl/nrepl                {:mvn/version "1.1.1"}
+  {:extra-deps {nrepl/nrepl                {:mvn/version "1.3.1"}
                 cider/cider-nrepl          {:mvn/version "0.47.1"}
                 com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
    :main-opts  ["--eval" "(apply require clojure.main/repl-requires)"
@@ -171,12 +176,13 @@
   ;; Rich Terminal REPL Prompt with nREPL and Portal connections
   ;; https://practical.li/clojure/clojure-cli/repl-reloaded/
   ;; clojure -M:repl/reloaded
+  #_#_
   :repl/reloaded
   {:extra-paths ["dev" "test"]
-   :extra-deps {nrepl/nrepl                  {:mvn/version "1.1.1"}
+   :extra-deps {nrepl/nrepl                  {:mvn/version "1.3.1"}
                 cider/cider-nrepl            {:mvn/version "0.47.1"}
                 com.bhauman/rebel-readline   {:mvn/version "0.1.4"}
-                djblue/portal                {:mvn/version "0.55.1"}   ; portal data inspector
+                djblue/portal                {:mvn/version "0.59.1"}   ; portal data inspector
                 clj-commons/clj-yaml         {:mvn/version "1.0.27"}   ; portal yaml support (optional)
                 org.clojure/tools.namespace  {:mvn/version "1.5.0"}
                 org.clojure/tools.trace      {:mvn/version "0.8.0"}
@@ -204,7 +210,7 @@
   ;; clojure -M:repl/remote --host hostname --port 12345
   ;; replace --host and --port values with that of remote nREPL server
   :repl/remote
-  {:extra-deps {nrepl/nrepl {:mvn/version "1.1.1"}}
+  {:extra-deps {nrepl/nrepl {:mvn/version "1.3.1"}}
    :main-opts ["--main" "nrepl.cmdline" "--connect"]}
 
   ;; ---------------------------------------------------
@@ -296,7 +302,7 @@
   ;; cd $XDG_CONFIG_HOME/clojure && clojure -T:search/outdated
   :search/outdated
   {:replace-paths ["."]
-   :replace-deps  {com.github.liquidz/antq {:mvn/version "2.8.1201"}
+   :replace-deps  {com.github.liquidz/antq {:mvn/version "2.11.1276"}
                    org.slf4j/slf4j-nop     {:mvn/version "2.0.13"}}
    :exec-fn antq.tool/outdated
    :exec-args {:directory ["."] ; default
@@ -311,7 +317,7 @@
 
   :imre/outdated
   {:replace-paths ["."]
-   :replace-deps  {com.github.liquidz/antq {:mvn/version "2.8.1201"}
+   :replace-deps  {com.github.liquidz/antq {:mvn/version "2.11.1276"}
                    org.slf4j/slf4j-nop     {:mvn/version "2.0.9"}}
    :exec-fn antq.tool/outdated
    :exec-args {:directory ["."] ; default
@@ -495,15 +501,15 @@
   ;; https://github.com/djblue/portal
 
   :inspect/portal-cli
-  {:extra-deps {djblue/portal {:mvn/version "0.55.1"}}}
+  {:extra-deps {djblue/portal {:mvn/version "0.59.1"}}}
 
   :inspect/portal-web
-  {:extra-deps {djblue/portal             {:mvn/version "0.55.1"}
+  {:extra-deps {djblue/portal             {:mvn/version "0.59.1"}
                 org.clojure/clojurescript {:mvn/version "1.11.60"}}
    :main-opts  ["--main" "cljs.main"]}
 
   :inspect/portal-node
-  {:extra-deps {djblue/portal             {:mvn/version "0.55.1"}
+  {:extra-deps {djblue/portal             {:mvn/version "0.59.1"}
                 org.clojure/clojurescript {:mvn/version "1.11.60"}}
    :main-opts  ["--main" "cljs.main" "-re" "node"]}
 
@@ -713,7 +719,7 @@
   ;; - (require '[clj-memory-meter.core :as memory-meter])
   ;; - (memory-meter/measure (your-expression))
   :performance/memory-meter
-  {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "0.3.0"}}
+  {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "0.4.0"}}
    :jvm-opts   ["-Djdk.attach.allowAttachSelf"]}
   ;; ---------------------------------------------------
 
@@ -789,13 +795,13 @@
   ;; - (require '[clj-java-decompiler.core :refer [decompile]])
   ;; - (decompile (your-expression))
   :imre/decompile
-  {:extra-deps {com.clojure-goes-fast/clj-java-decompiler {:mvn/version "0.3.4"}}}
+  {:extra-deps {com.clojure-goes-fast/clj-java-decompiler {:mvn/version "0.3.7"}}}
 
   :imre/speculative
   {:extra-deps {speculative/speculative {:mvn/version "0.0.3"}}}
 
   :imre/profile
-  {:extra-deps {com.clojure-goes-fast/clj-async-profiler {:mvn/version "1.1.1"}}
+  {:extra-deps {com.clojure-goes-fast/clj-async-profiler {:mvn/version "1.6.2"}}
    :jvm-opts   ["-Djdk.attach.allowAttachSelf" "-XX:+UnlockDiagnosticVMOptions" "-XX:+DebugNonSafepoints"]}
 
   :imre/tools.namespace
@@ -808,12 +814,12 @@
   ;; -Dvlaaad.reveal.prefs={:theme,:light,:font-family,"JetBrains Mono",:font-size,15}
 
   :lib/reveal
-  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.282"}}
+  {:extra-deps {vlaaad/reveal {:mvn/version "1.3.284"}}
    :jvm-opts   ["-Dvlaaad.reveal.prefs={:theme :light :font-family \"JetBrains Mono\" :font-size 15}"]}
 
   :inspect.reveal/prepl
   {:replace-paths []
-   :replace-deps  {vlaaad/reveal                     {:mvn/version "1.3.282"}
+   :replace-deps  {vlaaad/reveal                     {:mvn/version "1.3.284"}
                    #_#_com.phronemophobic/reveal-treemap {:mvn/version "0.1.6"}}
    :jvm-opts      ["-Dvlaaad.reveal.prefs={:theme :light :font-family \"JetBrains Mono\" :font-size 15}"]
    :main-opts     ["-m" "vlaaad.reveal" "remote-prepl" ":out-fn" "clojure.core/identity" ":port"]}

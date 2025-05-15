@@ -1,5 +1,5 @@
 {:lib com.github.liquidz/antq,
  :coord
- {:git/tag "2.8.1201",
-  :git/sha "030d821b7b7bde5f93972d7d3df317ab9f547b04",
+ {:git/tag "2.11.1276",
+  :git/sha "0e8d29f47977179bb076a74a0ee7ff576b0281fd",
   :git/url "https://github.com/liquidz/antq.git"}}
