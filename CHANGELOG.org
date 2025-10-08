@@ -1,9 +1,240 @@
 #+TITLE: Changelog
 
 * Unreleased
+
+* 2025-09-03
+** Added
+   - aliases: `update/dependency-versions` automatically updates everything to new versions
+   - dev: `dependencies-update` & `dependencies-outdated` make tasks
+
+** Updated
+   - dev: update GitHub actions versions for all workflows
+
+   | :file                                             | :name                                | :current   | :latest    |
+   |---------------------------------------------------|--------------------------------------|------------|------------|
+   | .github/workflows/changelog-check.yaml            | actions/checkout                     | v4         | v5         |
+   | .github/workflows/lint-review.yaml                | actions/checkout                     | v4         | v5         |
+   |                                                   | nnichols/clojure-lint-action         | v4         | v6         |
+   | .github/workflows/megalinter.yaml                 | actions/checkout                     | v4         | v5         |
+   | .github/workflows/quality-checks.yaml             | actions/checkout                     | v4         | v5         |
+   |                                                   | clj-kondo/clj-kondo                  | 2025.06.05 | 2025.07.28 |
+   | .github/workflows/scheduled-version-check.yaml    | actions/checkout                     | v4         | v5         |
+
+
+   - aliases: practicalli project template release 2025-09-04
+   - aliases: update library versions using `make dependencies-update`
+
+   | :name                                | :current   | :latest    |
+   |--------------------------------------|------------|------------|
+   | com.github.flow-storm/clojure        | 1.12.1     | 1.12.2     |
+   | com.github.flow-storm/flow-storm-dbg | 4.4.6      | 4.5.3      |
+   | djblue/portal                        | 0.59.1     | 0.61.0     |
+   | io.github.nextjournal/clerk          | 0.17.1102  | 0.18.1150  |
+   | io.github.seancorfield/deps-new      | v0.9.0     | v0.10.1    |
+   | nrepl/nrepl                          | 1.3.1      | 1.4.0      |
+   | ring/ring-mock                       | 0.6.1      | 0.6.2      |
+
+* 2025-07-01
+** Updated
+   - dev: cljstyle & clj-kondo updates in quality-checks
+   - aliases: update library versions using `make outdated`
+   | :name                                | :current | :latest  |
+   |--------------------------------------|----------|----------|
+   | cider/cider-nrepl                    | 0.56.0   | 0.57.0   |
+   | com.github.flow-storm/flow-storm-dbg | 4.4.4    | 4.4.6    |
+   | com.github.seancorfield/next.jdbc    | 1.3.1002 | 1.3.1048 |
+   | io.github.seancorfield/deps-new      | v0.8.1   | v0.9.0   |
+
+* 2025-06-03
+** Updated
+   - aliases: update library versions using `make outdated`
+   | :name                                | :current                                 | :latest                                  |
+   |--------------------------------------|------------------------------------------|------------------------------------------|
+   | cider/cider-nrepl                    | 0.55.7                                   | 0.56.0                                   |
+   | com.github.flow-storm/clojure        | 1.12.0-9                                 | 1.12.1                                   |
+   | com.github.flow-storm/flow-storm-dbg | 4.4.0                                    | 4.4.4                                    |
+   | djblue/portal                        | 0.59.0                                   | 0.59.1                                   |
+   | org.clojure/spec-alpha2              | 4cbfa677c4cd66339f18e1c122222c05c69e0d8e | eb94e46853d90153ba6dc72a4093719f38a90a4a |
+   | refactor-nrepl/refactor-nrepl        | 3.10.0                                   | 3.11.0                                   |
+   | zprint/zprint                        | 1.2.9                                    | 1.3.0                                    |
+
+* 2025-05-02
+** Added
+- dev: ci scheduled stale issue & pr check (monthly)
+- dev: update clj-kondo 2025.04.07 quality-checks workflow
+
+** Updated
+   - aliases: update library versions using `make outdated`
+   | :name                                | :current | :latest |
+   | ------------------------------------ |--------- | ------- |
+   | cider/cider-nrepl                    | 0.53.2   | 0.55.7  |
+   | com.github.flow-storm/flow-storm-dbg | 4.3.0    | 4.4.0   |
+   | djblue/portal                        | 0.58.5   | 0.59.0  |
+   | io.github.clj-holmes/clj-watson      | v6.0.0   | v6.0.1  |
+   | io.github.seancorfield/deps-new      | v0.8.0   | v0.8.1  |
+   | ring/ring-mock                       | 0.4.0    | 0.6.1   |
+
+* 2025-04-02
+** Added
+   - readme: list aliases with `clojure -X:deps aliases`
+   - aliases: `:src/java21` to include local java sources for java 21
+
+** Updated
+   - readme: simplify introduction, highlight common aliases
+   - dev: setup-clojure 12.3
+   - aliases: update library versions using `make outdated`
+
+   | :name                                | :current                                 | :latest                                  |
+   +--------------------------------------+------------------------------------------+------------------------------------------|
+   | borkdude/carve                       | e02b65f9de679450176a3fa26c89ffd5600d7eb8 | fdd1d0bc432f63db69e3a72167ef5e46f10dfba7 |
+   | cider/cider-nrepl                    | 0.52.1                                   | 0.53.2                                   |
+   | com.github.flow-storm/clojure        | 1.12.0-4                                 | 1.12.0-9                                 |
+   | com.github.flow-storm/flow-storm-dbg | 4.2.0                                    | 4.3.0                                    |
+   | com.github.liquidz/antq              | 2.11.1269                                | 2.11.1276                                |
+   | com.github.seancorfield/next.jdbc    | 1.3.994                                  | 1.3.1002                                 |
+   | io.github.clj-holmes/clj-watson      | v6.0.0                                   | v6.0.1                                   |
+
+
+* 2025-03-01
+** Updated
+   - dev: standard makefile tasks for Practicalli projects
+   - dev: lint-review v4 github action
+   - dev: megalinter v8 (uses latest minor version) github action
+   - dev: clj-kondo 2025.02.20 in quality check github action
+   - dev: update repl task and clojure alias docs
+   - aliases: outdated skip git diff between current and new dependency
+   - aliases: update library versions using `make outdated`
+
+   | :name                                  | :current | :latest  |
+   | -------------------------------------- | -------- | -------- |
+   | cider/cider-nrepl                      | 0.50.3   | 0.52.1   |
+   | com.bhauman/rebel-readline             | 0.1.4    | 0.1.5    |
+   | com.clojure-goes-fast/clj-memory-meter | 0.3.0    | 0.4.0    |
+   | com.github.flow-storm/clojure          | 1.12.0-2 | 1.12.0-4 |
+   | com.github.flow-storm/flow-storm-dbg   | 4.0.2    | 4.2.0    |
+   | com.github.seancorfield/next.jdbc      | 1.3.981  | 1.3.994  |
+   | djblue/portal                          | 0.58.4   | 0.58.5   |
+   | nrepl/nrepl                            | 1.3.0    | 1.3.1    |
+   | org.slf4j/slf4j-nop                    | 2.0.16   | 2.0.17   |
+
+
+* 2024-12-19
+** Added
+
+** Updated
+   - dev: clojure-lint-action v3 in lint-review workflow
+   - dev: megalinter java v8.3.0 in megalinter workflow
+   - dev: setup-clojure 13.1, clj-kondo 2024.11.14, cljstyle 0.17.642 in quality-checks workflow
+   - dev: markdown lint default practicalli configuration
+   - dev: github repository attributes for edn project
+   - aliases: update library versions using `make outdated`
+
+   | :name                                | :current                                 | :latest                                  |
+   | ------------------------------------ | ---------------------------------------- | ---------------------------------------- |
+   | cider/cider-nrepl                    | 0.50.2                                   | 0.50.3                                   |
+   | clj-commons/clj-yaml                 | 1.0.28                                   | 1.0.29                                   |
+   | com.github.flow-storm/clojure        | 1.12.0-1                                 | 1.12.0-2                                 |
+   | com.github.flow-storm/flow-storm-dbg | 3.17.4                                   | 4.0.2                                    |
+   | com.github.liquidz/antq              | 2.10.1241                                | 2.11.1250                                |
+   | com.github.seancorfield/next.jdbc    | 1.3.955                                  | 1.3.981                                  |
+   | djblue/portal                        | 0.58.2                                   | 0.58.4                                   |
+   | mvxcvi/cljstyle                      | 9be5bb9ed678a1e73670a3df3ece08bb22362441 | d40540a7a8e3efdd18f10cb288864e0ca15c7f8f |
+
+
+* 2024-11-03
+** Added
+   - alias: `:security/nvd-scan` and `:security/nvd-fix` library vulnerabilities scan and fix
+
+** Updated
+   - dev: megalinter v8.1.0 supports Grafana dashboards in flavors
+   - dev: lychee spell config file for megalinter workflow
+   - dev: clj-kondo 2024.09.27 in quality-checks GitHub workflow
+   - Update library versions using `make outdated`
+
+   | :name                                | :current   | :latest    |
+   | ------------------------------------ | ---------- | ---------- |
+   | clj-commons/clj-yaml                 | 1.0.27     | 1.0.28     |
+   | com.github.flow-storm/clojure        | 1.12.0     | 1.12.0-1   |
+   | com.github.flow-storm/flow-storm-dbg | 3.17.3     | 3.17.4     |
+   | com.github.liquidz/antq              | 2.9.1227   | 2.10.1241  |
+   | com.github.seancorfield/next.jdbc    | 1.3.939    | 1.3.955    |
+   | djblue/portal                        | 0.57.3     | 0.58.2     |
+   | integrant/repl                       | 0.3.3      | 0.4.0      |
+   | io.github.nextjournal/clerk          | 0.16.1016  | 0.17.1102  |
+
+   Available changes:
+   - https://github.com/clj-kondo/clj-kondo/blob/v2024.09.27/CHANGELOG.md
+   - https://github.com/clj-commons/clj-yaml/blob/v1.0.28/CHANGELOG.adoc
+   - https://github.com/clojure/clojure/compare/clojure-1.12.0...head
+   - https://github.com/liquidz/antq/blob/2.10.1241/CHANGELOG.adoc
+   - https://github.com/seancorfield/next-jdbc/blob/v1.3.955/CHANGELOG.md
+   - https://github.com/djblue/portal/blob/0.58.2/CHANGELOG.md
+   - https://github.com/weavejester/integrant-repl/compare/0.3.3...0.4.0
+   - https://github.com/nextjournal/clerk/blob/v0.17.1102/CHANGELOG.md
+
+
+* 2024-09-09
+** Added
+   - dev: megalinter-upgrade task to upgrade config
+   - dev: megalinter grafana dashboard connections via github organization secrets
+   - alias: `:security/nvd-scan` and `:security/nvd-fix` library vulnerabilities scan and fix
+
+** Updated
+   - dev: update megalinter config to version 8
+   - dev: update to clj-kondo 2024.08.29 in quality-checks workflow
+   - lib: practicalli project templates release 2024-09-09
+   - Update library versions using `make outdated`
+
+   | :name                                   | :current  | :latest |
+   |----------------------------------------|-----------|-----------|
+   | cider/cider-nrepl                       | 0.49.2     | 0.50.2   |
+   | com.github.flow-storm/clojure           | 1.11.4     | 1.12.0   |
+   | com.github.flow-storm/flow-storm-dbg    | 3.16.0     | 3.17.3   |
+   | com.github.liquidz/antq                 | 2.8.1206   | 2.9.1227 |
+   | com.github.seancorfield/clj-new         | 1.2.404    | 1.3.415  |
+   | com.h2database/h2                       | 2.3.230    | 2.3.232  |
+   | djblue/portal                           | 0.57.1     | 0.57.3   |
+   | io.github.seancorfield/deps-new         | v0.7.1     | v0.8.0   |
+   | nrepl/nrepl                             | 1.2.0      | 1.3.0    |
+   | org.slf4j/slf4j-nop                     | 2.0.13     | 2.0.16   |
+
+* 2024-08-04
+** Updated
+   - dev: quality check library update clj-kondo/clj-kondo 2024.08.01
+   - Update library versions using `make outdated`
+
+   | :name                                    | :current                                 | :latest                                  |
+   +------------------------------------------+------------------------------------------+------------------------------------------|
+   | cider/cider-nrepl                        | 0.49.1                                   | 0.49.2                                   |
+   | com.github.flow-storm/clojure            | 1.11.3-1                                 | 1.11.4                                   |
+   | com.github.flow-storm/flow-storm-dbg     | 3.16.0                                   | 3.17.1                                   |
+   | com.github.liquidz/antq                  | 2.8.1201                                 | 2.8.1206                                 |
+   | com.h2database/h2                        | 2.2.224                                  | 2.3.230                                  |
+   | djblue/portal                            | 0.56.0                                   | 0.57.1                                   |
+   | org.clojure/tools.deps.graph             | 1.1.84                                   | 1.1.90                                   |
+
+* 2024-07-17
+** Updated
+   - alias: project templates update to clojure 1.10.3
+   - Update library versions using `make outdated`
+   | :name                                | :current                                 | :latest                                  |
+   +--------------------------------------+------------------------------------------+------------------------------------------|
+   | cider/cider-nrepl                    | 0.47.1                                   | 0.49.1                                   |
+   | clojurians-zulip/feeds               | 4bf8109afc5cd5ab2f409151d4dd583644028b4a | d7e9deaec0b492998e20dee7735e0ad31d83e246 |
+   | com.github.flow-storm/flow-storm-dbg | 3.15.5                                   | 3.16.0                                   |
+   | com.github.seancorfield/next.jdbc    | 1.3.925                                  | 1.3.939                                  |
+   | djblue/portal                        | 0.55.1                                   | 0.56.0                                   |
+   | io.github.nextjournal/clerk          | 0.15.957                                 | 0.16.1016                                |
+   | io.github.seancorfield/deps-new      | v0.7.0                                   | v0.7.1                                   |
+   | lambdaisland/kaocha                  | 1.89.1380                                | 1.91.1392                                |
+   | nrepl/nrepl                          | 1.1.1                                    | 1.2.0                                    |
+
+
+2024-05-07
 ** Added
    - dev: add `deps-deprecated.edn` to cljstyle `:ignore` rule
    - dev: add `CHANGELOG.org` to Git ignore inclusive patterns
+   - alias: add `:lib/clojurestorm` to run Flowstorm debugger with ClojureStorm compiler
 
 ** Updated
    - Update library versions using `make outdated`
